@@ -186,9 +186,9 @@
             indent = 500;
         }
         
-        fill(255,255,255);
+        
         textSize(20);
-
+	fill(255,255,255);
         text("turn : "+ this.turn , 90+ indent,10 ,100 ,20);
 
         
