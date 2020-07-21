@@ -2,7 +2,7 @@
      var sketchProc = function(processingInstance) {
      with (processingInstance) {
 //1300,550
-    size(1500,650); 
+    size(1300,550); 
     frameRate(30);    
     bool menu = true;
     var credits = false;
