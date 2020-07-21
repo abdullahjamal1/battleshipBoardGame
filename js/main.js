@@ -4,7 +4,7 @@
 //1300,550
     size(1500,650); 
     frameRate(30);    
-    var menu = true;
+    bool menu = true;
     var credits = false;
     var testing = 0;
     var instructions = false;
