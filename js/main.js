@@ -1,8 +1,8 @@
 
      var sketchProc = function(processingInstance) {
      with (processingInstance) {
-
-    size(1300,550); 
+//1300,550
+    size(1500,650); 
     frameRate(30);    
     var menu = true;
     var credits = false;
