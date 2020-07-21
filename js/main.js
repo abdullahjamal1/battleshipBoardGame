@@ -1,10 +1,14 @@
 
-     var sketchProc = function(processingInstance) {
-     with (processingInstance) {
+  //   var sketchProc = function(processingInstance) {
+  //   with (processingInstance) {
 //1300,550
-    size(1300,550); 
-    frameRate(30);    
-    bool menu = true;
+  //  size(1300,550); 
+  //  frameRate(30);  
+	function setup() {
+	  createCanvas(1300, 550);
+	}
+
+    var menu = true;
     var credits = false;
     var testing = 0;
     var instructions = false;
@@ -1973,9 +1977,9 @@ var drawSubmarine = function(){
 
     };
 
-    }};
+ //   }};
 
     // Get the canvas that Processing-js will use
-    var canvas = document.getElementById("mycanvas"); 
+  //  var canvas = document.getElementById("mycanvas"); 
     // Pass the function sketchProc (defined in myCode.js) to Processing's constructor.
-    var processingInstance = new Processing(canvas, sketchProc);
+  //  var processingInstance = new Processing(canvas, sketchProc);
