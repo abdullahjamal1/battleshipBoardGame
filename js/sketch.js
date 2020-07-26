@@ -23,6 +23,7 @@
     var singlePlayer = false;
     var singlePlayerWin = false;
     var multiPlayerWin = false;
+    var densityLens = false;
 
 
     var mouseIsPressed = false;
