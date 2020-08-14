@@ -1,1 +1,1 @@
-These functions( game-states ) are invoked from the draw function 
+These functions( game-states ) are invoked from the draw.js
