@@ -1,5 +1,5 @@
 
-
+/* creates new object */
     var createNewMultiplayerObject = function(){
 
         var player1 = new player("p1", 1);
@@ -21,6 +21,10 @@
         var player2 = new player("p2", 2);
 	var bot = new botClass();
 
+/**
+mapSwap : swaps the maps of the players 
+@Param {String} gameType  gameType = "singlePlayer" or "multiPlayer"
+*/
 var mapSwap = function (gameType) {
 
     
