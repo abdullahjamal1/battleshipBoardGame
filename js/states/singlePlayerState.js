@@ -34,7 +34,7 @@ var singlePlayerState = function () {
 	if(DensityLensButtonOff.insideButton()){
 
             if(!mouseIsPressed){
-                DensityLensButtonOn.lightUpButton();
+                DensityLensButtonOff.lightUpButton();
             }
             if(mouseIsPressed){
                 densityLens = false;
