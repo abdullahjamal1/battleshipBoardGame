@@ -4,7 +4,9 @@ var singlePlayerState = function () {
 
     // background(0, 255, 255,100);
     var backButton1 = new button("back", 400, 450);
-    //var DensityLensButtonOn = new button("ON", 600, 440);
+    var DensityLensButtonOn = new button("ON", 600, 450);
+    var DensityLensButtonOff = new button("OFF", 720, 450);	
+	
     backButton1.draw();
 	
     densityLens = false;
@@ -17,8 +19,9 @@ var singlePlayerState = function () {
     }
     else {
         player1.drawGridHidden();
-        /*
+        
         DensityLensButtonOn.draw();
+	DensityLensButtonOff.draw();
         if(DensityLensButtonOn.insideButton()){
 
             if(!mouseIsPressed){
@@ -28,7 +31,16 @@ var singlePlayerState = function () {
                 densityLens = true;
             }
         }
-        */    
+	if(DensityLensButtonOff.insideButton()){
+
+            if(!mouseIsPressed){
+                DensityLensButtonOn.lightUpButton();
+            }
+            if(mouseIsPressed){
+                densityLens = false;
+            }
+        }
+           
     }
 
     // draws 10*10 grid for BOT
