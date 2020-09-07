@@ -9,7 +9,7 @@ var singlePlayerState = function () {
 	
     backButton1.draw();
 	
-    densityLens = false;
+    //densityLens = false;
 
     // draws 10*10 grid for player 1
     if (!player1.confirmButtonPushed) {
