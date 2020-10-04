@@ -10,6 +10,8 @@ uses probability density map to reduce number of average turns required to win t
  
  Supports single-player and offline-multiplayer.
  
+ Tit also provides a DFS based random island generation option too.
+ 
  Technologies used :- HTML, CSS, JavaScript (object-oriented)
  
  ***************************************************************************************************
