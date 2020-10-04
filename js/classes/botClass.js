@@ -6,18 +6,7 @@ var botClass = function () {
     this.curr_big_ship = 5;
     this.smallSize = 0;
 
-
-    this.grid = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    ];
+    this.grid = new Array(10);
 
     this.target_locked_x = [];
     this.target_locked_y = [];
@@ -30,9 +19,23 @@ var botClass = function () {
 // botclass inherits all player class methods
 botClass.prototype = Object.create(player.prototype);
 
+botClass.prototype.countShipStatus = function(str){
+
+        var numberOfShipsDestroyed = 0;
+        for(var i = 0; i < 5; i++){
+            if(bot.currLife[ i ] === 0){
+                numberOfShipsDestroyed ++;
+            }
+        }
+
+        return numberOfShipsDestroyed;
+
+}
+
 botClass.prototype.drawProbabilityDensityGrid = function () {
 
  var i = 1, j = 1;
+ var indent = 200;
 
         for (i = 0; i < 10; i++) {
 
@@ -41,13 +44,13 @@ botClass.prototype.drawProbabilityDensityGrid = function () {
                 if (this.grid[i][j] > 2) {
 
                     fill(this.grid[i][j] * 50, 0, 0);
-                    rect(550 + 30 * (i + 1), 50 + 30 * (j + 1), 30, 30);
+                    rect(indent + 550 + 30 * (i + 1), 50 + 30 * (j + 1), 30, 30);
 
                 }
                 else if (this.grid[i][j] === 2) {
 
-                    fill(255, 255, 255);
-                    rect(550 + 30 * (i + 1), 50 + 30 * (j + 1), 30, 30);
+                    fill(0, 0, 0);
+                    rect(indent + 550 + 30 * (i + 1), 50 + 30 * (j + 1), 30, 30);
                 }
 
             }
@@ -204,32 +207,33 @@ botClass.prototype.smallestAliveShip = function () {
 };
 botClass.prototype.initialize = function () {
 
-        var i, j;
+    for(var i = 0; i < 10; i++){
 
-        for (i = 0; i < 10; i++) {
+        this.grid[ i ] = new Array(10);
+    }
 
-            for (j = 0; j < 10; j++) {
+    for (var i = 0; i < 10; i++) {
 
-                // marks missed shot as 0 & ignore  in density map
-                if (this.gridHidden[i][j] === -1) {
-                    this.grid[i][j] = 0;
-                }
+        for (var j = 0; j < 10; j++) {
 
-
-                // mark hit shot as 1 & ignore in density map
-                else if (this.gridHidden[i][j] === 1) {
-                    this.grid[i][j] = 1;
-                }
-                else {
-                    this.grid[i][j] = 2;
-                }
+            // marks missed shot as 0 & ignore  in density map
+            if (this.gridHidden[i][j] === -1 || this.gridHidden[i][j] === ISLAND) {
+                this.grid[i][j] = 0;
+            }
+            // mark hit shot as 1 & ignore in density map
+            else if (this.gridHidden[i][j] === 1) {
+                this.grid[i][j] = 1;
+            }
+            else{
+                this.grid[i][j] = 2;
             }
         }
+    }
 
-        while (this.stack_x.length > 0) {
-            this.stack_x.pop();
-            this.stack_y.pop();
-        }
+    while (this.stack_x.length > 0) {
+        this.stack_x.pop();
+        this.stack_y.pop();
+    }
 };
 botClass.prototype.calcProbabilityDensity = function () {
 
@@ -267,7 +271,7 @@ botClass.prototype.calcProbabilityDensity = function () {
 
                 for (k = 0; k < this.curr_big_ship; k++) {
 
-                    if (this.grid[i][j + k] !== 0 && this.grid[i][j + k] !== 1) {
+                    if (this.grid[i][j + k] > 1) {
 
                         if (this.chainFire) {
 
@@ -296,7 +300,7 @@ botClass.prototype.calcProbabilityDensity = function () {
 
                 for (k = 0; k < this.curr_big_ship; k++) {
 
-                    if (this.grid[i + k][j] !== 0 && this.grid[i + k][j] !== 1) {
+                    if (this.grid[i + k][j] > 1) {
 
                         if (this.chainFire) {
 
@@ -346,7 +350,7 @@ botClass.prototype.play = function () {
             var tempY = this.missed_target_y.pop();
 
             // give loc high probability
-            //  this.grid[ tempX ][ tempY ] = this.grid[ tempX ][ tempY ] + 20;
+            this.grid[ tempX ][ tempY ] = this.grid[ tempX ][ tempY ] + 20;
             this.target_locked_x.push(tempX);
             this.target_locked_y.push(tempY);
             this.hitShipType = this.gridActual[tempX][tempY];
@@ -357,7 +361,10 @@ botClass.prototype.play = function () {
 
         var max = this.maxProbability();
 
-
+        while (this.stack_x.length > 0) {
+            this.stack_x.pop();
+            this.stack_y.pop();
+        }
 
         for (var i = 0; i < 10; i++) {
             for (var j = 0; j < 10; j++) {
@@ -373,8 +380,11 @@ botClass.prototype.play = function () {
         }
 
         // selects target randomly from highest density block 
-        botHitX = this.stack_x[floor(random(0, this.stack_x.length))];
-        botHitY = this.stack_y[floor(random(0, this.stack_y.length))];
+
+        var randomNumber = floor(random(0, this.stack_x.length));
+
+            botHitX = this.stack_x[randomNumber];
+            botHitY = this.stack_y[randomNumber];
 
         while (this.stack_x.length > 0) {
             this.stack_x.pop();
@@ -386,7 +396,7 @@ botClass.prototype.play = function () {
         if ((this.gridActual[ botHitX ][ botHitY ] === 0) && (this.gridHidden[ botHitX ][ botHitY ] === 0)) {
 
             this.gridHidden[ botHitX ][ botHitY ] = -1;
-            playerOneTurn = false;
+            playerSwitching = true;
             this.turn++;
 
         }
@@ -437,6 +447,8 @@ botClass.prototype.play = function () {
                     this.chainFire = false;
                 }
             }
+
+            // if chain fire is off
             else {
 
 
