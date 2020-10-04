@@ -3,22 +3,27 @@
     var createNewMultiplayerObject = function(){
 
         var player1 = new player("p1", 1);
+        player1.initializeGrid();
+        
         var player2 = new player("p2", 2);
+        player2.initializeGrid();
 
     };
 
     var createNewSinglePlayerObject = function(){
 
         var player1 = new player("p1", 1);
+        player1.initializeGrid();
 
         // destructor equivalent for previous...
-          densityLens = false;
+        densityLens = false;
         var bot = new botClass();
+        bot.initializeGrid();
       //  bot.destroy();
     };
 
-        var player1 = new player("p1", 1);
-        var player2 = new player("p2", 2);
+    var player1 = new player("p1", 1);
+    var player2 = new player("p2", 2);
 	var bot = new botClass();
 
 /**
@@ -73,3 +78,4 @@ var mapSwap = function (gameType) {
 
 
 };
+
