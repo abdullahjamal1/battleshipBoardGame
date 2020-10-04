@@ -39,11 +39,7 @@ var multiPlayerOfflineState = function () {
             }
             if (mouseIsPressed) {
 
-                if (player1.autoButtonPushed === true) {
-                    // initializes grid for player 1 
-                    player1.initializeGrid();
-                    //createNewMultiplayerObject();
-                }
+                player1.initializeGrid();
                 player1.arrangeShip();
                 player1.autoButtonPushed = true;
                 //shipArranged = true;
@@ -83,11 +79,8 @@ var multiPlayerOfflineState = function () {
                 player2AutoButton.lightUpButton();
             }
             if (mouseIsPressed) {
-                if (player2.autoButtonPushed === true) {
-                    // initializes grid for player 1 
-                    player2.initializeGrid();
-                    //createNewMultiplayerObject();
-                }
+
+                player2.initializeGrid();                
                 player2.arrangeShip();
                 player2.autoButtonPushed = true;
                 //shipArranged = true;
@@ -122,7 +115,35 @@ var multiPlayerOfflineState = function () {
     // main multiplayer pass N play if statement
     if (player1.confirmButtonPushed && player2.confirmButtonPushed) {
 
-        if (playerOneTurn) {
+        if(playerSwitching){
+
+            // delay loop
+            playerSwitchingIterator ++;
+
+                if(playerOneTurn){
+                anim.showMessage("PLAYER 1 TURN");
+                }
+                else{
+                anim.showMessage("PLAYER 2 TURN");
+                }
+
+            if(playerSwitchingIterator > 50){
+
+                playerSwitchingIterator = 0;
+
+                playerSwitching = false;
+
+                if(playerOneTurn === true){
+                playerOneTurn = false;
+                }
+                else{
+                    playerOneTurn = true;
+                }
+
+             }
+        }
+
+        else  if (playerOneTurn) {
 
 
             if (player2.play(2) === true) {
