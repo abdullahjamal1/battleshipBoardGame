@@ -1,11 +1,10 @@
 
-
 var singlePlayerState = function () {
 
     // background(0, 255, 255,100);
-    var backButton1 = new button("back", 400, 450);
-    var DensityLensButtonOn = new button("DensityON", 600, 450);
-    var DensityLensButtonOff = new button("DensityOFF", 800, 450);	
+    var backButton1 = new button("  back", 350, 450);
+    var DensityLensButtonOn = new button("DensityLensON", 550, 450, 230);
+    var DensityLensButtonOff = new button("DensityLensOFF", 810, 450, 240);	
 	
     backButton1.draw();
 	
@@ -21,7 +20,7 @@ var singlePlayerState = function () {
         player1.drawGridHidden();
         
         DensityLensButtonOn.draw();
-	DensityLensButtonOff.draw();
+	    DensityLensButtonOff.draw();
         if(DensityLensButtonOn.insideButton()){
 
             if(!mouseIsPressed){
@@ -31,7 +30,7 @@ var singlePlayerState = function () {
                 densityLens = true;
             }
         }
-	if(DensityLensButtonOff.insideButton()){
+	    if(DensityLensButtonOff.insideButton()){
 
             if(!mouseIsPressed){
                 DensityLensButtonOff.lightUpButton();
@@ -60,11 +59,7 @@ var singlePlayerState = function () {
             }
             if (mouseIsPressed) {
 
-                if (player1.autoButtonPushed === true) {
-                    // initializes grid for player 1 
-                    player1.initializeGrid();
-                    //createNewMultiplayerObject();
-                }
+                player1.initializeGrid();                
                 player1.arrangeShip();
                 player1.autoButtonPushed = true;
                 //shipArranged = true;
@@ -90,20 +85,49 @@ var singlePlayerState = function () {
                 player1.confirmButtonPushed = true;
 
                 // arrange bots ship
+                bot.initializeGrid();
                 bot.arrangeShip();
                 mapSwap("singlePlayer");
-
 
                 //shipArranged = true;
             }
         }
     }
 
+
     // if both players have deployed ships start the game
     // main multiplayer pass N play if statement
     if (player1.confirmButtonPushed) {
 
-        if (playerOneTurn) {
+        if(playerSwitching){
+
+            // delay loop
+            playerSwitchingIterator ++;
+
+                if(playerOneTurn){
+                anim.showMessage("PLAYER 1 TURN");
+                }
+                else{
+                anim.showMessage(" BOT TURN");
+                }
+
+            if(playerSwitchingIterator > 50){
+
+                playerSwitchingIterator = 0;
+
+                playerSwitching = false;
+
+                if(playerOneTurn === true){
+                playerOneTurn = false;
+                }
+                else{
+                    playerOneTurn = true;
+                }
+
+             }
+        }
+
+        else  if (playerOneTurn) {
 
             // argument 3 represents bot
             //  bot.play();
