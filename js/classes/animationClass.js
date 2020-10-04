@@ -78,6 +78,20 @@ class animation {
         this.submarineGlass(submarine_X + -82, submarine_Y + 1);
         this.submarineGlass(submarine_X + -164, submarine_Y + 1);
     }
+
+    showMessage(msg){
+
+        background(255, 255, 255, 60);
+        fill(237, 34, 93);
+        strokeWeight(10);
+        rect(400, 150, 400, 150, 300);
+        fill(255, 255, 255);
+        textFont('Helvetica');
+        textSize(40);
+        text(msg, 440, 210, 400, 150);
+        strokeWeight(1);
+    }
+
     animationPlay() {
 
 
@@ -110,7 +124,7 @@ class animation {
         this.drawSubmarine(this.submarineX1, this.submarineY1);
         this.drawSubmarine(this.submarineX2 , this.submarineY2);
 
-        this.drawPebbles(4, -200);
+      //  this.drawPebbles(4, -200);
     }
 }
 
