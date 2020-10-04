@@ -1,5 +1,5 @@
 //   var playClass = function(){
-// inherit attributes ffrom ship class
+// inherit attributes from ship class
 //   shipClass.call( this );
 // };
 var player1AutoButton = new button("auto", 50, 400);
@@ -20,17 +20,21 @@ var anim = new animation();
 /**
 draw
 description: draw function is executed 60 frames per second 
-
 */
 
 var draw = function () {
 
-
-    background(0, 0, 255, 50);
     anim.animationPlay();
+
+    if(densityLens){
+        background(0, 300, 0, 100);
+    }
     //Main menu
     if (menu === true){
         menuState();
+    }
+    else if(makeNewMap === true){
+        newMapState();
     }
     else if (singlePlayer === true){
         singlePlayerState();
