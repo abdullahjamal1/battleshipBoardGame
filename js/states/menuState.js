@@ -19,14 +19,14 @@ var menuState = function () {
         //if mouse is pressed go to play
         if (singlePlayerButton.insideButton()) {
 
-
             singlePlayerButton.lightUpButton();
 
             if (mouseIsPressed) {
+
                 menu = false;
                 singlePlayer = true;
-
-                createNewSinglePlayerObject();
+                makeNewMap = true;
+                initializeRandomMap();
             }    
         }
 
@@ -38,8 +38,10 @@ var menuState = function () {
 
                 menu = false;
                 multiPlayerOffline = true;
-                // creates new object for players and buttons for next frame 
+                initializeRandomMap();
                 createNewMultiplayerObject();
+                player1.initializeGrid();
+                player2.initializeGrid();
 
             }    
         }
@@ -89,3 +91,4 @@ var menuState = function () {
     }
 
 };
+
