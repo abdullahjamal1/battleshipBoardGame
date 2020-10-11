@@ -28,6 +28,7 @@ var singlePlayerState = function () {
             }
             if(mouseIsPressed){
                 densityLens = true;
+		mouseIsPressed = false;    
             }
         }
 	    if(DensityLensButtonOff.insideButton()){
@@ -37,6 +38,7 @@ var singlePlayerState = function () {
             }
             if(mouseIsPressed){
                 densityLens = false;
+		mouseIsPressed = false;       
             }
         }
            
@@ -62,6 +64,7 @@ var singlePlayerState = function () {
                 player1.initializeGrid();                
                 player1.arrangeShip();
                 player1.autoButtonPushed = true;
+		mouseIsPressed = false;   
                 //shipArranged = true;
             }
         }
@@ -88,7 +91,7 @@ var singlePlayerState = function () {
                 bot.initializeGrid();
                 bot.arrangeShip();
                 mapSwap("singlePlayer");
-
+		mouseIsPressed = false;   
                 //shipArranged = true;
             }
         }
@@ -176,7 +179,7 @@ var singlePlayerState = function () {
             player1.initializeGrid();
             bot.initializeGrid();
 
-            //mouseIsPressed = false;
+            mouseIsPressed = false;
         }
     }
 
