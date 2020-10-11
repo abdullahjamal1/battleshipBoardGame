@@ -44,7 +44,7 @@ var generateIslands = function(islandsCount){
         var randNumber = floor(random(0, ar[0].length));
 
         if(ar[0].length === 0){
-        break;
+        continue;
         }
 
         stack.first.push(ar[0][randNumber]);
