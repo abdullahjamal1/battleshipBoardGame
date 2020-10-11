@@ -7,43 +7,62 @@ var generateIslands = function(islandsCount){
     stack.first.push(floor(random(0, 10)));
     stack.second.push(floor(random(0, 10)));
 
-    while(stack.first.length !== 0 && islandsCount > 0){
+    while(islandsCount > 0){
+        
+        var nodeX;
+        var nodeY;
 
-        var nodeX = stack.first.pop();
-        var nodeY = stack.second.pop();
+        if(stack.first.length === 0 && islandsCount > 0){
+            
+            while(randomMap[ nodeX ][ nodeY ] === ISLAND){
+                
+                nodeX = floor(random(0, 10));
+                nodeY = floor(random(0, 10));
+            } 
+            stack.first.push(nodeX);
+            stack.second.push(nodeY);
+        }    
+        
+        nodeX = stack.first.pop();
+        nodeY = stack.second.pop();
+        
+        while(stack.first.length !== 0 && randomMap[ nodeX ][ nodeY ] === ISLAND ){
+
+            nodeX = stack.first.pop();
+            nodeY = stack.second.pop();
+            
+        } 
+        
+        if(randomMap[ nodeX ][ nodeY ] === ISLAND){
+            continue;   
+        }    
 
         randomMap[ nodeX ][ nodeY ] = ISLAND;
+        
+        islandsCount --;
 
-        var blocked = true;
         var ar = [[],[]];
 
         if(nodeX + 1 < 10 && randomMap[nodeX + 1][nodeY] !== ISLAND){
             ar[0].push(nodeX + 1);
             ar[1].push(nodeY);
-            blocked = false;
         }
         if(nodeY + 1 < 10 && randomMap[nodeX][nodeY + 1] !== ISLAND){
             ar[0].push(nodeX);
-            ar[1].push(nodeY + 1);
-            blocked = false;            
+            ar[1].push(nodeY + 1);        
         }
         if(nodeX - 1 >= 0 && randomMap[nodeX - 1][nodeY] !== ISLAND){
             ar[0].push(nodeX - 1);
-            ar[1].push(nodeY);
-            blocked = false;            
+            ar[1].push(nodeY);         
         }
         if(nodeY - 1 >= 0 && randomMap[nodeX][nodeY - 1] !== ISLAND){
             ar[0].push(nodeX);
-            ar[1].push(nodeY - 1);
-            blocked = false;            
+            ar[1].push(nodeY - 1);         
         }
        
-        if(blocked === false){
-        islandsCount --;
-        }
         var randNumber = floor(random(0, ar[0].length));
 
-        if(ar[0].length === 0){
+        if(ar[0].length === 0){  
         continue;
         }
 
