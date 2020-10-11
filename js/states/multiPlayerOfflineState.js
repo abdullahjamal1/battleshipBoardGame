@@ -42,6 +42,7 @@ var multiPlayerOfflineState = function () {
                 player1.initializeGrid();
                 player1.arrangeShip();
                 player1.autoButtonPushed = true;
+                mouseIsPressed = false;
                 //shipArranged = true;
             }
         }
@@ -62,6 +63,7 @@ var multiPlayerOfflineState = function () {
                 player1.autoButtonPushed = false;
                 player1.shipArranged = true;
                 player1.confirmButtonPushed = true;
+                mouseIsPressed = false;                
                 //shipArranged = true;
             }
         }
@@ -83,6 +85,7 @@ var multiPlayerOfflineState = function () {
                 player2.initializeGrid();                
                 player2.arrangeShip();
                 player2.autoButtonPushed = true;
+                mouseIsPressed = false;                
                 //shipArranged = true;
             }
         }
@@ -107,6 +110,7 @@ var multiPlayerOfflineState = function () {
                 player2.shipArranged = true;
                 // swap maps of players
                 mapSwap("multiPlayer");
+                mouseIsPressed = false;                
             }
         }
     }
@@ -182,6 +186,7 @@ var multiPlayerOfflineState = function () {
             createNewMultiplayerObject();
             player1.initializeGrid();
             player2.initializeGrid();
+            mouseIsPressed = false;
             //mouseIsPressed = false;
         }
     }
