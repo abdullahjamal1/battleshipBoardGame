@@ -132,8 +132,8 @@ var newMapState = function(){
         else{
             if(islandsCount > 0){
                 islandsCount--;
-                mouseIsPressed = false;
             }
+            mouseIsPressed = false;
         }
     }
 
@@ -161,6 +161,7 @@ var newMapState = function(){
             //if mouse is pressed go to menu
             makeNewMap = false;
             createNewSinglePlayerObject();        
+            mouseIsPressed = false;
         }
     } 
 
@@ -180,7 +181,7 @@ var newMapState = function(){
                 }
             }         
             generateIslands(islandsCount);
-
+             mouseIsPressed = false;
         }
     }    
     // back button  - common for both the players
@@ -197,6 +198,7 @@ var newMapState = function(){
             singlePlayer = false;
             multiPlayerOffline = false;
             menu = true;
+            mouseIsPressed = false;
         }
     }
 
