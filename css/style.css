@@ -7,6 +7,11 @@
     padding: 15px;
   }
 
+  .no-select{
+    -webkit-user-select: none;
+    cursor: not-allowed;
+  }  
+
   .footer {
     background-color: #0099cc;
     color: #ffffff;
