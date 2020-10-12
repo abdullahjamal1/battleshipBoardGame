@@ -1,4 +1,4 @@
-# BATTLESHIP ISLE OF WAR 
+# [BATTLESHIP ISLE OF WAR](https://aj941ga.github.io/battleshipBoardGame/) 
 _______________________________________________________________________________________________________
  
 ### To play battleship isle of war click [here](https://aj941ga.github.io/battleshipBoardGame/).
