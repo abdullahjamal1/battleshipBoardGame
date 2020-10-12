@@ -1,4 +1,4 @@
-<h1 style="background-color: DodgerBlue;"> BATTLESHIP ISLE OF WAR </h1>
+<h1 style="background-color: Blue;"> BATTLESHIP ISLE OF WAR </h1>
 _______________________________________________________________________________________________________
  GAME_LINK : https://aj941ga.github.io/battleshipBoardGame/
  
