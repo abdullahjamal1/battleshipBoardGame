@@ -1,7 +1,7 @@
-<h1 style="background-color: Blue;"> BATTLESHIP ISLE OF WAR </h1>
+# BATTLESHIP ISLE OF WAR 
 _______________________________________________________________________________________________________
  
- GAME_LINK : https://aj941ga.github.io/battleshipBoardGame/
+### To play battleship isle of war click [here](https://aj941ga.github.io/battleshipBoardGame/).
  
 A board web game in which two players arrange five ships on their maps and then do guess-fire on each
 other's map in alternate turns until either player wins by sinking all the ships. In single-player AI 
@@ -15,5 +15,16 @@ uses probability density map to reduce number of average turns required to win t
  
  Technologies used :- HTML, CSS, JavaScript (object-oriented)
  
- ***************************************************************************************************
- working to make game online-multiplayer.... 
+ ________________________________________________________________________________________________________
+ ## Task List
+ 
+ - [x] implement single-player
+ - [x] implement offline-multiplayer
+ - [x] implement game-statistics
+ - [ ] add audio in game
+ - [ ] save game statistics in cookies
+ - [ ] create login page for game
+ - [ ] implement online-multiplayer
+ - [ ] deploy on cloud
+ ________________________________________________________________________________________________________
+ 
