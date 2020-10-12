@@ -8,14 +8,18 @@ A board web game in which two players arrange five ships on their maps and then 
 other's map in alternate turns until either player wins by sinking all the ships. In single-player AI 
 uses probability density map to reduce number of average turns required to win to 17 !
 
- Uses p5.Js to provide graphical and interactive experience to the player.
- 
- Supports single-player and offline-multiplayer.
- 
- It also provides a DFS based random island generation option too.
- 
- Technologies used :- HTML, CSS, JavaScript (object-oriented)
- 
+Technologies used :- HTML, CSS, JavaScript (object-oriented)
+_________________________________________________________________________________________________________
+ # Features
+ * graphical and interative GUI
+ * background animation
+ * supports random island generation on sea using DFS with number of island blocks being customizable
+ * supports auto-arrange, which arranges all ships randomly on grid
+ * supports single-player
+ * supports offline multi-player
+ * supports game statistics
+ * AI uses probability-density model to guess optimal shot
+ * supports density lens option to reveal how the AI works internally
  ________________________________________________________________________________________________________
  ## Task List
  
