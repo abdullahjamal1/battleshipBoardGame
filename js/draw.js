@@ -18,8 +18,8 @@ var statisticsButton = new button("statistics", posX + 100, posY + 290);
 var anim = new animation();
 
 /**
-draw
-description: draw function is executed 60 frames per second 
+* draw
+* description: draw function is executed 60 frames per second, it invokes different gameStates based on values 
 */
 
 var draw = function () {
@@ -29,7 +29,7 @@ var draw = function () {
     if(densityLens){
         background(0, 300, 0, 100);
     }
-    //Main menu
+    
     if (menu === true){
         menuState();
     }
