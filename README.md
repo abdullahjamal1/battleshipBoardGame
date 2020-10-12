@@ -1,4 +1,4 @@
-# Battleship Isle Of War 
+# BATTLESHIP ISLE OF WAR
 _______________________________________________________________________________________________________
  GAME_LINK : https://aj941ga.github.io/battleshipBoardGame/
  
