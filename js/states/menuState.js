@@ -4,8 +4,8 @@ var menuState = function () {
     fill(255, 100, 0, 220);
     rect(posX + 10, posY + 15, 350, 370, 60);
     fill(255, 255, 255);
-    textSize(70);
-    text("BATTLESHIP-YURI", 300, 20, 1000, 200);
+    textSize(65);
+    text("BATTLESHIP ISLE OF WAR", 260, 20, 1000, 200);
 
     multiplayerButton.draw();
     onlineButton.draw();
