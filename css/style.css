@@ -7,9 +7,10 @@
     padding: 15px;
   }
 
-  .no-select{
+  #no-select{
     -webkit-user-select: none;
     cursor: not-allowed;
+    pointer-events: none;
   }  
 
   .footer {
