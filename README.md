@@ -18,7 +18,7 @@ ________________________________________________________________________________
  * supports single-player
  * supports offline multi-player
  * supports game statistics
- * AI uses probability-density model to guess optimal shot
+ * AI uses probability-density model to guess shot
  * supports density lens option to reveal how the AI works internally
  ________________________________________________________________________________________________________
  ## Task List
@@ -26,6 +26,7 @@ ________________________________________________________________________________
  - [x] implement single-player
  - [x] implement offline-multiplayer
  - [x] implement game-statistics
+ - [x] add random-island generation
  - [ ] add audio in game
  - [ ] save game statistics in cookies
  - [ ] create login page for game
