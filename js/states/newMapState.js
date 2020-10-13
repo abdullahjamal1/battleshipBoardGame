@@ -160,7 +160,13 @@ var newMapState = function(){
         if (mouseIsPressed) {
             //if mouse is pressed go to menu
             makeNewMap = false;
-            createNewSinglePlayerObject();        
+            
+            if(singlePlayer === true){
+              createNewSinglePlayerObject();   
+            }
+            else{
+              createNewMultiPlayerObject();   
+            }    
             mouseIsPressed = false;
         }
     } 
