@@ -11,8 +11,7 @@ uses probability density map to reduce number of average turns required to win t
 Technologies used :- HTML, CSS, JavaScript (object-oriented)
 _________________________________________________________________________________________________________
  # Features
- * graphical and interative GUI
- * background animation
+ * graphical and interactive GUI
  * supports random island generation on sea using DFS with number of island blocks being customizable
  * supports auto-arrange, which arranges all ships randomly on grid
  * supports single-player
