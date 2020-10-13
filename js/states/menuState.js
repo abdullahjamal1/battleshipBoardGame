@@ -38,11 +38,8 @@ var menuState = function () {
 
                 menu = false;
                 multiPlayerOffline = true;
+                makeNewMap = true;  
                 initializeRandomMap();
-                createNewMultiplayerObject();
-                player1.initializeGrid();
-                player2.initializeGrid();
-
             }    
         }
         else if (onlineButton.insideButton()) {
