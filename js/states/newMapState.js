@@ -165,7 +165,7 @@ var newMapState = function(){
               createNewSinglePlayerObject();   
             }
             else{
-              createNewMultiPlayerObject();   
+              createNewMultiplayerObject(); 
             }    
             mouseIsPressed = false;
         }
