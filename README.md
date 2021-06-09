@@ -1,7 +1,7 @@
-# [BATTLESHIP ISLE OF WAR](https://aj941ga.github.io/battleshipBoardGame/) 
+# [BATTLESHIP Oasis](https://aj941ga.github.io/battleshipBoardGame/) 
 _______________________________________________________________________________________________________
  
-### To play battleship isle of war click [here](https://aj941ga.github.io/battleshipBoardGame/).
+### To play battleship Oasis click [here](https://aj941ga.github.io/battleshipBoardGame/).
 ### [snapShots](snapShots/)
  
 A board web game in which two players arrange five ships on their maps and then do guess-fire on each
