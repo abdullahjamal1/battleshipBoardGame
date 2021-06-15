@@ -5,7 +5,6 @@ var menuState = function () {
     rect(posX + 10, posY + 15, 350, 370, 60);
     fill(255, 255, 255);
     textSize(65);
-    text("BATTLESHIP ISLE OF WAR", 260, 20, 1000, 200);
 
     multiplayerButton.draw();
     onlineButton.draw();
