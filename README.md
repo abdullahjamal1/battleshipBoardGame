@@ -1,7 +1,7 @@
-# [BATTLESHIP Oasis](https://aj941ga.github.io/battleshipBoardGame/) 
+# [BATTLESHIP Oasis](https://abdullahjamal1.github.io/battleshipBoardGame/ 
 _______________________________________________________________________________________________________
  
-### To play battleship Oasis click [here](https://aj941ga.github.io/battleshipBoardGame/).
+### To play battleship Oasis click [here](https://abdullahjamal1.github.io/battleshipBoardGame/).
 ### [snapShots](snapShots/)
 ![battleship game](https://github.com/aj941ga/battleshipBoardGame/blob/master/snapShots/battleship-all.png)
  
