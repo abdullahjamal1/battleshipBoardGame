@@ -27,8 +27,8 @@ ________________________________________________________________________________
  - [x] implement offline-multiplayer
  - [x] implement game-statistics
  - [x] add random-island generation
- - [ ] save game statistics in localStorage
+ - [x] save game statistics in localStorage
+ - [x] add PWA support
  - [ ] add audio in game
- - [ ] create login page for game
  ________________________________________________________________________________________________________
  
