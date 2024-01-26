@@ -57,7 +57,4 @@ var draw = function () {
     else if (winState === true){
         winStateCall();
     }
-
-
-
 };

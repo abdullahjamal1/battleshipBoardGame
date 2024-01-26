@@ -5,7 +5,7 @@ var creditsState = function () {
     //text
     fill(255, 255, 255);
     textSize(50);
-    text(" - Abdullah Jamal ", 150, 150);
+    text(" ------------- ", 150, 150);
     //make button
     var backButton = new button("back", 150, 300);
     backButton.draw();

@@ -27,10 +27,8 @@ ________________________________________________________________________________
  - [x] implement offline-multiplayer
  - [x] implement game-statistics
  - [x] add random-island generation
+ - [ ] save game statistics in localStorage
  - [ ] add audio in game
- - [ ] save game statistics in cookies
  - [ ] create login page for game
- - [ ] implement online-multiplayer
- - [ ] deploy on cloud
  ________________________________________________________________________________________________________
  

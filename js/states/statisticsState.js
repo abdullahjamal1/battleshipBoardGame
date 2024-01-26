@@ -1,6 +1,7 @@
 
 
 var statisticsState = function () {
+  statTable = JSON.parse(Base64.decode(localStorage.getItem("stats")));
 
     // background(0, 255, 255,100);
     var backButton = new button("back", 150, 480);
@@ -8,7 +9,7 @@ var statisticsState = function () {
 
     var statTableX = 200,
     statTableY = 230;
-  var slotHeight = 40 * 1.5,
+    var slotHeight = 40 * 1.5,
     slotWidth = 100 * 1.5;
 
 

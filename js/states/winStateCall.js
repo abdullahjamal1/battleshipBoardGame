@@ -1,19 +1,19 @@
-        
-        const statisticsEnum = {
-            row : {
-              Player1: 0,
-              Player2: 1,
-              botPlayer: 2
-            },
-            col : {
-              matchesWon : 0,
-              matchesLost : 1,
-              shipsDestroyed : 2,
-              shipsLost : 3,
-              avgTurnsToWin : 4,
-              winPercentage : 5
-            }
-          };
+
+const statisticsEnum = {
+    row : {
+        Player1: 0,
+        Player2: 1,
+        botPlayer: 2
+    },
+    col : {
+        matchesWon : 0,
+        matchesLost : 1,
+        shipsDestroyed : 2,
+        shipsLost : 3,
+        avgTurnsToWin : 4,
+        winPercentage : 5
+    }
+};
 
 function roundTo(num){
 
@@ -188,6 +188,8 @@ var winStateCall = function () {
 
         player1.drawGridActual();
     }
+
+    localStorage.setItem("stats", Base64.encode(JSON.stringify(statTable)));
 
     var backButton = new button("Menu", 150, 450);
     backButton.draw();
