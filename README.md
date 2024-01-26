@@ -28,7 +28,8 @@ ________________________________________________________________________________
  - [x] implement game-statistics
  - [x] add random-island generation
  - [x] save game statistics in localStorage
- - [x] add PWA support
+ - [x] add PWA support [article followed for PWA support](https://cloudbytes.dev/snippets/convert-a-pelican-website-to-pwa-using-workbox)
+ - [x] deploy PWA to play store [article for converting PWA to android app](https://developers.google.com/codelabs/pwa-in-play#0)
  - [ ] add audio in game
  ________________________________________________________________________________________________________
  
