@@ -16,7 +16,7 @@ var instructionsState = function () {
     var backButton = new button("back", 225, 500);
     backButton.draw();
     //if the mouse is in the same place as the button
-    if (mouseX > backButton.x && mouseX < backButton.x + backButton.width && mouseY > backButton.y && mouseY < backButton.y + backButton.height) {
+    if (backButton.insideButton()) {
         //check to see if the mouse is pressed
         if (!mouseIsPressed) {
             //if mouse is not pressed then light up button

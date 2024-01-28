@@ -34,8 +34,7 @@ var createNewSinglePlayerObject = function(){
 	// destructor equivalent for previous...
 	densityLens = false;
 	bot = new botClass();
-	bot.initializeGrid();
-
+    bot.initializeGrid();
 };
 
 /**

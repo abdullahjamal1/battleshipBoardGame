@@ -7,6 +7,9 @@ var botClass = function () {
     this.smallSize = 0;
 
     this.grid = new Array(10);
+    for(var i = 0; i < 10; i++){
+        this.grid[ i ] = new Array(10);
+    }
 
     this.target_locked_x = [];
     this.target_locked_y = [];
@@ -43,7 +46,7 @@ botClass.prototype.drawProbabilityDensityGrid = function () {
 
                 if (this.grid[i][j] > 2) {
 
-                    fill(this.grid[i][j] * 50, 0, 0);
+                    fill(this.grid[i][j] * 25, 0, 0);
                     rect(indent + 550 + 30 * (i + 1), 50 + 30 * (j + 1), 30, 30);
 
                 }
@@ -349,7 +352,7 @@ botClass.prototype.play = function () {
             var tempX = this.missed_target_x.pop();
             var tempY = this.missed_target_y.pop();
 
-            // give loc high probability
+            // give lock high probability
             this.grid[ tempX ][ tempY ] = this.grid[ tempX ][ tempY ] + 20;
             this.target_locked_x.push(tempX);
             this.target_locked_y.push(tempY);

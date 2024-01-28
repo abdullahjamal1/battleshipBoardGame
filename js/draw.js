@@ -24,6 +24,8 @@ var anim = new animation();
 
 var draw = function () {
 
+    scale(globalScale);
+
     anim.animationPlay();
 
     if(densityLens){

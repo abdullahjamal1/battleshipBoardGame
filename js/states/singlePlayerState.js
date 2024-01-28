@@ -3,8 +3,7 @@ var singlePlayerState = function () {
 
     // background(0, 255, 255,100);
     var backButton1 = new button("  back", 350, 450);
-    var DensityLensButtonOn = new button("DensityLensON", 550, 450, 230);
-    var DensityLensButtonOff = new button("DensityLensOFF", 810, 450, 240);	
+    var DensityLensButton = new button("Density Lens", 550, 450, 230);
 	
     backButton1.draw();
 	
@@ -19,29 +18,17 @@ var singlePlayerState = function () {
     else {
         player1.drawGridHidden();
         
-        DensityLensButtonOn.draw();
-	    DensityLensButtonOff.draw();
-        if(DensityLensButtonOn.insideButton()){
+        DensityLensButton.draw();
+        if(DensityLensButton.insideButton()){
 
             if(!mouseIsPressed){
-                DensityLensButtonOn.lightUpButton();
+                DensityLensButton.lightUpButton();
             }
             if(mouseIsPressed){
-                densityLens = true;
-		mouseIsPressed = false;    
+                densityLens = !densityLens;
+		        mouseIsPressed = false;    
             }
-        }
-	    if(DensityLensButtonOff.insideButton()){
-
-            if(!mouseIsPressed){
-                DensityLensButtonOff.lightUpButton();
-            }
-            if(mouseIsPressed){
-                densityLens = false;
-		mouseIsPressed = false;       
-            }
-        }
-           
+        }           
     }
 
     // draws 10*10 grid for BOT
@@ -96,7 +83,6 @@ var singlePlayerState = function () {
             }
         }
     }
-
 
     // if both players have deployed ships start the game
     // main multiplayer pass N play if statement
@@ -155,11 +141,10 @@ var singlePlayerState = function () {
                 singlePlayerWin = true;
             }
         }
-        
         if(densityLens === true){
+            bot.calcProbabilityDensity();
             bot.drawProbabilityDensityGrid();
         }
-        
 
     }
 

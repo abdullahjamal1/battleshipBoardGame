@@ -19,7 +19,7 @@ button.prototype.draw = function () {
 };
 button.prototype.insideButton = function () {
 
-    if (mouseX > this.x && mouseX < this.x + this.width && mouseY > this.y && mouseY < this.y + this.height) {
+    if (mouseX > (this.x) * globalScale && mouseX < (this.x + this.width) * globalScale && mouseY > (this.y) * globalScale && mouseY < (this.y + this.height) * globalScale) {
         this.lightUpButton();
         return 1;
     }
@@ -28,7 +28,7 @@ button.prototype.insideButton = function () {
 };
 button.prototype.isPressed = function () {
 
-    if (mouseX > this.x && mouseX < this.x + this.width && mouseY > this.y && mouseY < this.y + this.height) {
+    if (this.insideButton()) {
         if (mouseIsPressed()) {
             return 1;
         }

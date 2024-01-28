@@ -350,7 +350,7 @@ player.prototype.play = function (playerIs) {
 
             for (j = 1; j <= 10; j++) {
 
-                if (mouseX > indent + 50 + 30 * i && mouseX < indent + 50 + 30 * (i + 1) && mouseY > 50 + 30 * j && mouseY < 50 + 30 * (j + 1)) {
+                if (mouseX/globalScale > indent + 50 + 30 * i && mouseX/globalScale < indent + 50 + 30 * (i + 1) && mouseY/globalScale > 50 + 30 * j && mouseY/globalScale < 50 + 30 * (j + 1)) {
 
                     if (!mouseIsPressed) {
 

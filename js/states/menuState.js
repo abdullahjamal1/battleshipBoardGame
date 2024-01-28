@@ -13,7 +13,7 @@ var menuState = function () {
     statisticsButton.draw();
     singlePlayerButton.draw();
 
-    if (mouseX > singlePlayerButton.x && mouseX < singlePlayerButton.x + singlePlayerButton.width && mouseY > singlePlayerButton.y) {
+    if (mouseX > (singlePlayerButton.x * globalScale) && mouseX < ((singlePlayerButton.x + singlePlayerButton.width) * globalScale) && mouseY > (singlePlayerButton.y * globalScale)) {
 
         //if mouse is pressed go to play
         if (singlePlayerButton.insideButton()) {

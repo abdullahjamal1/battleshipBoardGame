@@ -1,0 +1,42 @@
+{
+  "packageId": "io.github.abdullahjamal1.twa",
+  "host": "abdullahjamal1.github.io",
+  "name": "Battleship Oasis Game",
+  "launcherName": "Battleship",
+  "display": "standalone",
+  "themeColor": "#270573",
+  "themeColorDark": "#000000",
+  "navigationColor": "#000000",
+  "navigationColorDark": "#000000",
+  "navigationDividerColor": "#000000",
+  "navigationDividerColorDark": "#000000",
+  "backgroundColor": "#333333",
+  "enableNotifications": true,
+  "startUrl": "/battleshipBoardGame/index.html",
+  "iconUrl": "https://abdullahjamal1.github.io/battleshipBoardGame/assets/512x512.png",
+  "splashScreenFadeOutDuration": 300,
+  "signingKey": {
+    "path": "/Users/abdullahjamal/Desktop/personal-project/battleshipBoardGame/android.keystore",
+    "alias": "android"
+  },
+  "appVersionName": "5",
+  "appVersionCode": 5,
+  "shortcuts": [],
+  "generatorApp": "bubblewrap-cli",
+  "webManifestUrl": "https://abdullahjamal1.github.io/battleshipBoardGame/manifest.json",
+  "fallbackType": "customtabs",
+  "features": {},
+  "alphaDependencies": {
+    "enabled": false
+  },
+  "enableSiteSettingsShortcut": true,
+  "isChromeOSOnly": false,
+  "isMetaQuest": false,
+  "fullScopeUrl": "https://abdullahjamal1.github.io/battleshipBoardGame/",
+  "minSdkVersion": 19,
+  "orientation": "landscape",
+  "fingerprints": [],
+  "additionalTrustedOrigins": [],
+  "retainedBundles": [],
+  "appVersion": "5"
+}

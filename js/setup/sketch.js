@@ -2,8 +2,8 @@
   function setup() {
     
     createCanvas(1300, 550);
-     frameRate(50);
-  
+    frameRate(50);
+
 	}
 
     var mouseIsPressed = false;
@@ -21,6 +21,7 @@
     /**
     global variables
     */
+    var globalScale = 1.0;
     var menu = true;
     var credits = false;
     var instructions = false;
