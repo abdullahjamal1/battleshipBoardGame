@@ -79,16 +79,18 @@
       statTable[i] = new Array(6);
     }
 
-    // initializing statistics table
+    if(localStorage.getItem("stats") === null){
+      // initializing statistics table
 
-    for (var i = 0; i < 3; i++) {
-      for (var j = 0; j < 6; j++) {
-        statTable[i][j] = 0;
+      for (var i = 0; i < 3; i++) {
+        for (var j = 0; j < 6; j++) {
+          statTable[i][j] = 0;
+        }
       }
-    }
-
-    if(localStorage.getItem("stats") == null){
       localStorage.setItem("stats", Base64.encode(JSON.stringify(statTable)));
+    }
+    else{
+      statTable = JSON.parse(Base64.decode(localStorage.getItem("stats")));
     }
 
 

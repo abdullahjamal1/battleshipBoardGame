@@ -30,6 +30,7 @@ ________________________________________________________________________________
  - [x] save game statistics in localStorage
  - [x] add PWA support [article followed for PWA support](https://cloudbytes.dev/snippets/convert-a-pelican-website-to-pwa-using-workbox)
  - [x] deploy PWA to play store [article for converting PWA to android app](https://developers.google.com/codelabs/pwa-in-play#0)
+ - [x] add support for chrome extension [article for adding support](https://dev.to/chromiumdev/shipping-pwas-as-chrome-extensions-3l5c)
  - [ ] add audio in game
  ________________________________________________________________________________________________________
  
