@@ -1,7 +1,7 @@
     
   function setup() {
     
-    createCanvas(1300, 550);
+    createCanvas(750, 375);
     frameRate(50);
 
 	}
@@ -21,7 +21,7 @@
     /**
     global variables
     */
-    var globalScale = 1.0;
+    var globalScale = 0.65;
     var menu = true;
     var credits = false;
     var instructions = false;

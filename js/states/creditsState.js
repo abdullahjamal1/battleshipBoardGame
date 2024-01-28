@@ -4,8 +4,8 @@ var creditsState = function () {
     // background(0, 255, 255,100);
     //text
     fill(255, 255, 255);
-    textSize(50);
-    text(" ------------- ", 150, 150);
+    textSize(15);
+    text("Github repo: https://github.com/abdullahjamal1/battleshipBoardGame ", 150, 150);
     //make button
     var backButton = new button("back", 150, 300);
     backButton.draw();
