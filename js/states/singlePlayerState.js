@@ -77,6 +77,32 @@ var singlePlayerState = function () {
   // if both players have deployed ships start the game
   // main multiplayer pass N play if statement
   if (player1.confirmButtonPushed) {
+    if (triggerShipSunkAlert || triggerShipHitAlert || playerSwitching) {
+    }else if (playerOneTurn) {
+      // argument 3 represents bot
+      //  bot.play();
+      if (bot.play() === true) {
+        // make separate class for win
+        winState = true;
+        singlePlayer = false;
+
+        bot.win = true;
+        singlePlayerWin = true;
+      }
+    } else {
+      //  player1.play(1);
+      if (player1.play(1) === true) {
+        winState = true;
+        singlePlayer = false;
+
+        player1.win = true;
+        singlePlayerWin = true;
+      }
+    }
+    if (densityLens === true) {
+      bot.calcProbabilityDensity();
+      bot.drawProbabilityDensityGrid();
+    }
     if (triggerShipSunkAlert) {
       shipSunkAlertIterator++;
       if (shipSunkAlertIterator <= 90) {
@@ -113,31 +139,7 @@ var singlePlayerState = function () {
           playerOneTurn = true;
         }
       }
-    } else if (playerOneTurn) {
-      // argument 3 represents bot
-      //  bot.play();
-      if (bot.play() === true) {
-        // make separate class for win
-        winState = true;
-        singlePlayer = false;
-
-        bot.win = true;
-        singlePlayerWin = true;
-      }
-    } else {
-      //  player1.play(1);
-      if (player1.play(1) === true) {
-        winState = true;
-        singlePlayer = false;
-
-        player1.win = true;
-        singlePlayerWin = true;
-      }
-    }
-    if (densityLens === true) {
-      bot.calcProbabilityDensity();
-      bot.drawProbabilityDensityGrid();
-    }
+    } 
   }
 
   // back button  - common for both the players
