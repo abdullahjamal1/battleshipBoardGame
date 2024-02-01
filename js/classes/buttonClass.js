@@ -9,8 +9,7 @@ var button = function (str, x, y, w = 170, h = 40) {
 };
 // buttons method
 button.prototype.draw = function () {
-
-   // fill(219, 9, 219, 200);  -> light pink
+    // fill(219, 9, 219, 200);  -> light pink
     fill(0, 210, 0, 200);
     rect(this.x, this.y, this.width, this.height, 10);
     fill(0, 0, 0);
@@ -18,29 +17,28 @@ button.prototype.draw = function () {
     text(this.txt, this.x + 11, this.y + 30);
 };
 button.prototype.insideButton = function () {
-
-    if (mouseX > (this.x) * globalScale && mouseX < (this.x + this.width) * globalScale && mouseY > (this.y) * globalScale && mouseY < (this.y + this.height) * globalScale) {
+    if (
+        mouseX > this.x * globalScale &&
+        mouseX < (this.x + this.width) * globalScale &&
+        mouseY > this.y * globalScale &&
+        mouseY < (this.y + this.height) * globalScale
+    ) {
         this.lightUpButton();
         return 1;
     }
     return 0;
-
 };
 button.prototype.isPressed = function () {
-
     if (this.insideButton()) {
         if (mouseIsPressed()) {
             return 1;
-        }
-        else {
+        } else {
             return 0;
         }
     }
     return 0;
-
 };
 button.prototype.lightUpButton = function () {
-
     fill(240, 218, 240, 100);
     rect(this.x, this.y, this.width, this.height, 10);
 };
