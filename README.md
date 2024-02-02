@@ -1,15 +1,26 @@
-# [BATTLESHIP Oasis](https://abdullahjamal1.github.io/battleshipBoardGame/ 
-_______________________________________________________________________________________________________
- 
-### To play battleship Oasis click [here](https://abdullahjamal1.github.io/battleshipBoardGame/).
-### [snapShots](snapShots/)
-![battleship game](https://github.com/aj941ga/battleshipBoardGame/blob/master/snapShots/battleship-all.png)
- 
-A board web game in which two players arrange five ships on their maps and then do guess-fire on each
-other's map in alternate turns until either player wins by sinking all the ships. In single-player AI 
-uses probability density map to reduce number of average turns required to win to 17 !
+## [BATTLESHIP OASIS BOARD GAME](https://abdullahjamal1.github.io/battleshipBoardGame/) 
+_____________________________________________________
 
-Technologies used :- HTML, CSS, JavaScript (object-oriented)
+### To play battleship game click [here](https://abdullahjamal1.github.io/battleshipBoardGame/).
+
+Download game as a chrome extension
+
+[<img src="https://storage.googleapis.com/web-dev-uploads/image/WlD8wC6g8khYWPJUsQceQkhXSlv1/UV4C4ybeBTsZt43U4xis.png">](https://chromewebstore.google.com/detail/battleship/ebkjodkggmaecphknjfepmdibcaddjbh)
+
+### [Snapshots](snapShots/)
+![battleship game](https://github.com/abdullahjamal1/battleshipBoardGame/blob/master/snapShots/battleship-all.png)
+ 
+Battleship Oasis Board Game
+
+An offline battleship board web game in which two players arrange five ships on their maps and then do guess-fire on each other's map in alternate turns until either player wins by sinking all the ships. 
+
+Whats different from other battleship board games ?
+
+* Supports creating island blocks where ships cannot be placed making the game interesting. 
+* A tough to defeat bot, which uses probability density map to reduce number of average turns required to win to 17 ! 
+* Turn on density lens to find how bot plays better under hoods.
+
+Technologies used :- HTML, CSS, JavaScript (p5.js)
 _________________________________________________________________________________________________________
  # Features
  * graphical and interactive GUI
