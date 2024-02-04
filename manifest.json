@@ -1,7 +1,7 @@
 {
-    "name": "Battleship",
+    "name": "Battleship Game - Island Edition",
     "version": "0.1",
-    "description": "Battleship Oasis Board Game",
+    "description": "Classic Battleship board game with special island edition for your browser. Face a tough battle with AI and uncover its tactics using density filter.",
     "action": {
       "default_popup": "index.html",
       "default_title": "Battleship",

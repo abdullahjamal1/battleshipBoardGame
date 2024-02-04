@@ -2,7 +2,7 @@ var statisticsState = function () {
   statTable = JSON.parse(Base64.decode(localStorage.getItem("stats")));
 
   // background(0, 255, 255,100);
-  var backButton = new button("back", 150, 480);
+  var backButton = new button("Back", 150, 480);
   backButton.draw();
 
   var statTableX = 180,

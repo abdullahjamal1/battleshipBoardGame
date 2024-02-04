@@ -84,12 +84,12 @@ class animation {
         }
 
         strokeWeight(3);
-        rect(400, 150, 400, 150, 300);
+        rect(400, 200, 400, 150, 300);
         fill(255, 255, 255);
         strokeWeight(1);
         textFont("Helvetica");
         textSize(textMessageSize);
-        text(msg, 440, 210, 400, 150);
+        text(msg, 440, 260, 400, 150);
     }
 
     animationPlay() {

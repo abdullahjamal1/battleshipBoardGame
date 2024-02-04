@@ -28,7 +28,7 @@ var winStateCall = function () {
     if (player1.win === true) {
 
         textSize(40);
-        text("Player 1 Wins --- player 1 map !!! turns:- " + player1.turn, 400, 400, 400, 400);
+        text("Player 1 Wins !!! Turns:- " + player1.turn, 400, 470, 400, 400);
 
 
         if (singlePlayerWin === true) {
@@ -111,7 +111,7 @@ var winStateCall = function () {
     else if (player2.win === true) {
 
         textSize(40);
-        text("Player 2 Wins --- player 2 map !!! turns :- " + player2.turn, 400, 400, 400, 400);
+        text("Player 2 Wins !!! Turns :- " + player2.turn, 400, 470, 400, 400);
 
         if (!statTableUpdated) {
 
@@ -154,7 +154,7 @@ var winStateCall = function () {
     else {
 
         textSize(40);
-        text("BOT Wins --- bot win !!! turns:-" + bot.turn, 400, 400, 400, 400);
+        text("BOT Wins !!! turns:-" + bot.turn, 400, 460, 400, 400);
 
         if (statTableUpdated === false) {
 
@@ -191,7 +191,7 @@ var winStateCall = function () {
 
     localStorage.setItem("stats", Base64.encode(JSON.stringify(statTable)));
 
-    var backButton = new button("Menu", 150, 450);
+    var backButton = new button("Menu", 150, 500);
     backButton.draw();
 
     if (backButton.insideButton()) {

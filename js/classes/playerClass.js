@@ -81,7 +81,7 @@ player.prototype.drawGridActual = function () {
     for (i = 1; i <= 10; i++) {
         for (j = 1; j <= 10; j++) {
             fill(64, 54, 255);
-            rect(indent + 50 + 30 * i, 50 + 30 * j, 30, 30);
+            rect(indent + 50 + 35 * i, 50 + 35 * j, 35, 35);
 
             // draws the ships on the map
             if (this.gridActual[i - 1][j - 1] > 0) {
@@ -90,12 +90,12 @@ player.prototype.drawGridActual = function () {
                     this.shipName[this.gridActual[i - 1][j - 1] - 1].color.g,
                     this.shipName[this.gridActual[i - 1][j - 1] - 1].color.b
                 );
-                ellipse(indent + 65 + 30 * i, 65 + 30 * j, 25, 25);
+                ellipse(indent + 67.5 + 35 * i, 67.5 + 35 * j, 25, 25);
             }
 
             if (this.gridActual[i - 1][j - 1] === ISLAND) {
                 fill(255, 212, 128);
-                rect(indent + 50 + 30 * i, 50 + 30 * j, 30, 30);
+                rect(indent + 50 + 35 * i, 50 + 35 * j, 35, 35);
             }
         }
     }
@@ -108,12 +108,14 @@ player.prototype.drawGridHidden = function () {
     fill(255, 255, 255);
     textSize(25);
     fill(44, 37, 184);
-    rect(170 + indent, 400, 120, 45)
+    rect(120 + indent, 460, 120, 40)
+    rect(280 + indent, 460, 120, 40)
     fill(255, 255, 255);
-    text(this.playerIs === 2 ? "Player 2" : "Player 1", 185 + indent, 415, 200, 50);
+    text(this.playerIs === 2 ? "Player 2" : "Player 1", 130 + indent, 470, 200, 50);
+    text("Turn : " + this.turn, 290 + indent, 470, 200, 50);
 
-    textSize(20);
-    text("Turn : " + this.turn, 170 + indent, 10, 100, 20);
+    // textSize(20);
+    // text("Turn : " + this.turn, 170 + indent, 10, 100, 20);
 
     for (i = 0; i < this.shipName.length; i++) {
         for (j = 0; j < this.shipName[i].size; j++) {
@@ -152,13 +154,13 @@ player.prototype.drawGridHidden = function () {
         textFont("Helvetica");
         textSize(20);
         fill(44, 37, 184);
-        rect(indent + 50 + 30 * i, 80, 30, 30);
+        rect(indent + 50 + 35 * i, 80, 35, 35);
         fill(255, 255, 255);
-        text(String.fromCharCode(64 + i), indent + 60 + 30 * i, 105);
+        text(String.fromCharCode(64 + i), indent + 60 + 35 * i, 105.5);
         fill(44, 37, 184);
-        rect(indent + 50, 80 + 30 * i, 30, 30);
+        rect(indent + 50, 80 + 35 * i, 35, 35);
         fill(255, 255, 255);
-        text(i, indent + (i === 10 ? 52.5 : 57.5), 102.5 + 30 * i);
+        text(i, indent + (i === 10 ? 55 : 62.5), 105 + 35 * i);
         for (j = 1; j <= 10; j++) {
             // block not yet hit
             //   if(this.gridHidden[i-1][j-1] === 0){
@@ -169,20 +171,22 @@ player.prototype.drawGridHidden = function () {
                     fill(255, 212, 128);
                 }
 
-                rect(indent + 50 + 30 * i, 80 + 30 * j, 30, 30);
+                rect(indent + 50 + 35 * i, 80 + 35 * j, 35, 35);
             }
             // target hit inside the block
             if (this.gridHidden[i - 1][j - 1] > 0) {
                 // red color
-                fill(255, 56, 63);
-                ellipse(indent + 65 + 30 * i, 95 + 30 * j, 20, 20);
+                // fill(255, 56, 63);
+                fill(214, 45, 51);
+                ellipse(indent + 67.5 + 35 * i, 97.5 + 35 * j, 25, 25);
             }
 
             // missed inside block
             else if (this.gridHidden[i - 1][j - 1] === -1) {
                 // yellow color
-                fill(255, 255, 0);
-                ellipse(indent + 65 + 30 * i, 95 + 30 * j, 20, 20);
+                // fill(255, 255, 0);
+                fill(222, 222, 33);
+                ellipse(indent + 67.5 + 35 * i, 97.5 + 35 * j, 25, 25);
             }
         }
     }
@@ -346,14 +350,14 @@ player.prototype.play = function (playerIs) {
         for (i = 1; i <= 10; i++) {
             for (j = 1; j <= 10; j++) {
                 if (
-                    mouseX / globalScale > indent + 50 + 30 * i &&
-                    mouseX / globalScale < indent + 50 + 30 * (i + 1) &&
-                    mouseY / globalScale > 80 + 30 * j &&
-                    mouseY / globalScale < 80 + 30 * (j + 1)
+                    mouseX / globalScale > indent + 50 + 35 * i &&
+                    mouseX / globalScale < indent + 50 + 35 * (i + 1) &&
+                    mouseY / globalScale > 80 + 35 * j &&
+                    mouseY / globalScale < 80 + 35 * (j + 1)
                 ) {
                     if (!mouseIsPressed) {
                         fill(140, 184, 250, 200);
-                        rect(indent + 50 + 30 * i, 80 + 30 * j, 30, 30);
+                        rect(indent + 50 + 35 * i, 80 + 35 * j, 35, 35);
                     }
 
                     if (mouseIsPressed) {

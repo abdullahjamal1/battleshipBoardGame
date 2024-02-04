@@ -2,10 +2,10 @@
 // inherit attributes from ship class
 //   shipClass.call( this );
 // };
-var player1AutoButton = new button("Auto", 50, 400);
-var player1ConfirmButton = new button("Confirm", 250, 400);
-var player2ConfirmButton = new button("Confirm", 750, 400);
-var player2AutoButton = new button("Auto", 550, 400);
+var player1AutoButton = new button("Auto", 80, 450);
+var player1ConfirmButton = new button("Confirm", 280, 450);
+var player2ConfirmButton = new button("Confirm", 750, 450);
+var player2AutoButton = new button("Auto", 550, 450);
 
 var posX = 400,
     posY = 120;

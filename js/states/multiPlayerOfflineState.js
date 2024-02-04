@@ -2,7 +2,7 @@
 var multiPlayerOfflineState = function () {
     //background
     //background(0, 255, 255,100);
-    var backButton1 = new button("back", 400, 450);
+    var backButton1 = new button("Exit", 400, 510);
     backButton1.draw();
 
     // draws 10*10 grid for player 1
