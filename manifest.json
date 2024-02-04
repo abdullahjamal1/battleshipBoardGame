@@ -1,7 +1,7 @@
 {
     "name": "Battleship Game - Island Edition",
-    "version": "0.1",
-    "description": "Classic Battleship board game with special island edition for your browser. Face a tough battle with AI and uncover its tactics using density filter.",
+    "version": "0.3",
+    "description": "Classic Battleship board game with special island edition and tough AI for your browser.",
     "action": {
       "default_popup": "index.html",
       "default_title": "Battleship",
