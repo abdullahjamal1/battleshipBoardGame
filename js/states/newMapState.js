@@ -86,9 +86,9 @@ var drawGeneratedMap = function (randomMap) {
 var islandsCount = 0;
 
 var newMapState = function () {
-    var backButton = new button("  back", 250, 450);
-    var newMapButton = new button("new map", 450, 450);
-    var startButton = new button("start", 650, 450);
+    var backButton = new button("Back", 250, 450);
+    var newMapButton = new button("New Map", 450, 450);
+    var startButton = new button("Start", 650, 450);
 
     var islandX = 600,
         islandY = 385;
@@ -96,11 +96,11 @@ var newMapState = function () {
         "    " + islandsCount,
         islandX,
         islandY,
-        120,
-        40
+        125,
+        45
     );
-    var leftArrow = new button("<", islandX + 5, islandY + 5, 30, 30);
-    var rightArrow = new button(">", islandX + 120 - 35, islandY + 5, 30, 30);
+    var leftArrow = new button("<", islandX + 5, islandY + 5, 35, 35);
+    var rightArrow = new button(">", islandX + 120 - 35, islandY + 5, 35, 35);
 
     fill(255, 255, 255);
     text("Island Blocks:", islandX - 200, islandY + 7, 200, 40);

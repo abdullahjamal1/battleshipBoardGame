@@ -103,21 +103,17 @@ player.prototype.drawGridActual = function () {
 player.prototype.drawGridHidden = function () {
     var i = 1,
         j = 1,
-        indent = 0;
+        indent = this.playerIs === 2 ? 650 : 0;
 
     fill(255, 255, 255);
-    textSize(30);
-
-    if (this.playerIs === 2) {
-        indent = 650;
-
-        text("Player 2", 160 + indent, 400, 200, 50);
-    } else {
-        text("Player 1", 160 + indent, 400, 200, 50);
-    }
+    textSize(25);
+    fill(44, 37, 184);
+    rect(170 + indent, 400, 120, 45)
+    fill(255, 255, 255);
+    text(this.playerIs === 2 ? "Player 2" : "Player 1", 185 + indent, 415, 200, 50);
 
     textSize(20);
-    text("turn : " + this.turn, 90 + indent, 10, 100, 20);
+    text("Turn : " + this.turn, 170 + indent, 10, 100, 20);
 
     for (i = 0; i < this.shipName.length; i++) {
         for (j = 0; j < this.shipName[i].size; j++) {
@@ -141,7 +137,7 @@ player.prototype.drawGridHidden = function () {
                         this.shipName[i].color.b
                     );
                 } else {
-                    noFill();
+                    noFill();   
                 }
             }
             rect(indent + i * 85 + 40 + 20 * j, 40, 20, 25);
@@ -151,10 +147,21 @@ player.prototype.drawGridHidden = function () {
     fill(64, 54, 255);
 
     for (i = 1; i <= 10; i++) {
+        
+        fill(255, 255, 255);
+        textFont("Helvetica");
+        textSize(20);
+        fill(44, 37, 184);
+        rect(indent + 50 + 30 * i, 80, 30, 30);
+        fill(255, 255, 255);
+        text(String.fromCharCode(64 + i), indent + 60 + 30 * i, 105);
+        fill(44, 37, 184);
+        rect(indent + 50, 80 + 30 * i, 30, 30);
+        fill(255, 255, 255);
+        text(i, indent + (i === 10 ? 52.5 : 57.5), 102.5 + 30 * i);
         for (j = 1; j <= 10; j++) {
             // block not yet hit
             //   if(this.gridHidden[i-1][j-1] === 0){
-
             fill(64, 54, 255);
             if (densityLens === false || this.playeris !== 2) {
                 if (this.gridHidden[i - 1][j - 1] === ISLAND) {
@@ -162,20 +169,20 @@ player.prototype.drawGridHidden = function () {
                     fill(255, 212, 128);
                 }
 
-                rect(indent + 50 + 30 * i, 50 + 30 * j, 30, 30);
+                rect(indent + 50 + 30 * i, 80 + 30 * j, 30, 30);
             }
             // target hit inside the block
             if (this.gridHidden[i - 1][j - 1] > 0) {
                 // red color
                 fill(255, 56, 63);
-                ellipse(indent + 65 + 30 * i, 65 + 30 * j, 20, 20);
+                ellipse(indent + 65 + 30 * i, 95 + 30 * j, 20, 20);
             }
 
             // missed inside block
             else if (this.gridHidden[i - 1][j - 1] === -1) {
                 // yellow color
                 fill(255, 255, 0);
-                ellipse(indent + 65 + 30 * i, 65 + 30 * j, 20, 20);
+                ellipse(indent + 65 + 30 * i, 95 + 30 * j, 20, 20);
             }
         }
     }
@@ -341,12 +348,12 @@ player.prototype.play = function (playerIs) {
                 if (
                     mouseX / globalScale > indent + 50 + 30 * i &&
                     mouseX / globalScale < indent + 50 + 30 * (i + 1) &&
-                    mouseY / globalScale > 50 + 30 * j &&
-                    mouseY / globalScale < 50 + 30 * (j + 1)
+                    mouseY / globalScale > 80 + 30 * j &&
+                    mouseY / globalScale < 80 + 30 * (j + 1)
                 ) {
                     if (!mouseIsPressed) {
                         fill(140, 184, 250, 200);
-                        rect(indent + 50 + 30 * i, 50 + 30 * j, 30, 30);
+                        rect(indent + 50 + 30 * i, 80 + 30 * j, 30, 30);
                     }
 
                     if (mouseIsPressed) {

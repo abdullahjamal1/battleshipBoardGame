@@ -37,9 +37,9 @@ class animation {
             centerX - bodyLength / 2 - tailWidth,
             centerY + tailHeight
         );
-        // eye
-        fill(33, 33, 33);
-        ellipse(centerX + bodyLength / 4, centerY, bodyHeight / 5, bodyHeight / 5);
+        // // eye
+        // fill(33, 33, 33);
+        // ellipse(centerX + bodyLength / 4, centerY, bodyHeight / 5, bodyHeight / 5);
     }
     submarineGlass(submarine_X, submarine_Y) {
         fill(1, 36, 43);
@@ -56,15 +56,15 @@ class animation {
         this.drawFish(x + 65, y + 294, 310, 20, 290);
     }
     drawSubmarine(submarine_X, submarine_Y) {
-        fill(209, 4, 4);
+        fill(150, 4, 4);
         ellipse(submarine_X + 196, submarine_Y + 36, 105, 70);
         ellipse(submarine_X + 2, submarine_Y + 36, 105, 70);
-        fill(224, 3, 3);
+        fill(150, 3, 3);
         rect(submarine_X + 1, submarine_Y + 1, 200, 70);
 
-        fill(163, 0, 38);
+        fill(100, 0, 38);
         rect(submarine_X + 93, submarine_Y + -42, 40, 45);
-        fill(163, 0, 38);
+        fill(100, 0, 38);
         rect(submarine_X + 93, submarine_Y + 71, 40, 14);
 
         this.submarineGlass(submarine_X, submarine_Y);
@@ -73,23 +73,23 @@ class animation {
     }
 
     showMessage(msg, textMessageSize = 40, type = "info") {
-        background(255, 255, 255, 30);
+        // background(255, 255, 255, 30);
         // fill(237, 34, 93);
         if (type === "info") {
-            fill(0, 210, 0, 250);
+            fill(0, 160, 0, 250);
         } else if (type === "warn") {
-            fill(180, 0, 0, 250);
+            fill(224, 80, 70, 250);
         } else {
-            fill(240, 0, 0, 250);
+            fill(156, 3, 3, 250);
         }
 
-        strokeWeight(10);
+        strokeWeight(3);
         rect(400, 150, 400, 150, 300);
         fill(255, 255, 255);
+        strokeWeight(1);
         textFont("Helvetica");
         textSize(textMessageSize);
         text(msg, 440, 210, 400, 150);
-        strokeWeight(1);
     }
 
     animationPlay() {

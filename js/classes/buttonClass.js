@@ -10,7 +10,7 @@ var button = function (str, x, y, w = 170, h = 40) {
 // buttons method
 button.prototype.draw = function () {
     // fill(219, 9, 219, 200);  -> light pink
-    fill(0, 210, 0, 200);
+    fill(0, 190, 0, 200);
     rect(this.x, this.y, this.width, this.height, 10);
     fill(0, 0, 0);
     textSize(30);

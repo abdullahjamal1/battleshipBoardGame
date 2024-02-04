@@ -40,10 +40,10 @@ botClass.prototype.drawProbabilityDensityGrid = function () {
         for (j = 0; j < 10; j++) {
             if (this.grid[i][j] > 2) {
                 fill(this.grid[i][j] * 25, 0, 0);
-                rect(indent + 550 + 30 * (i + 1), 50 + 30 * (j + 1), 30, 30);
+                rect(indent + 550 + 30 * (i + 1), 80 + 30 * (j + 1), 30, 30);
             } else if (this.grid[i][j] === 2) {
                 fill(0, 0, 0);
-                rect(indent + 550 + 30 * (i + 1), 50 + 30 * (j + 1), 30, 30);
+                rect(indent + 550 + 30 * (i + 1), 80 + 30 * (j + 1), 30, 30);
             }
         }
     }

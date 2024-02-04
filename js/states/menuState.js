@@ -1,8 +1,6 @@
 //draw function
 var menuState = function () {
-    //rectangle to go around the buttons
-    // fill(255, 100, 0, 220);
-    // rect(posX + 10, posY + 15, 350, 370, 60);
+
     fill(1, 36, 43, 10);
     strokeWeight(50);
     ellipse(posX + 190, posY + 140, 350, 350);

@@ -16,8 +16,7 @@ var statisticsState = function () {
   // fill(0, 0, 0);
   // text("ONLINE", statTableX / 4 + 195, statTableY / 4 + 10, slotWidth, slotHeight);
 
-  // fill(255, 105, 200, 200);
-  fill(0, 210, 0, 200);
+  fill(0, 180, 0, 200);
 
   rect(statTableX / 4 + 30, statTableY / 4 - 7, slotWidth, slotHeight);
 
@@ -31,9 +30,7 @@ var statisticsState = function () {
     slotWidth,
     slotHeight
   );
-
-  // fill(255, 105, 200, 200);
-  fill(0, 210, 0, 200);
+  fill(0, 180, 0, 200);
 
   rect(
     statTableX - slotWidth,
