@@ -30,10 +30,6 @@ var draw = function () {
 
     anim.animationPlay();
 
-    if (densityLens) {
-        background(0, 300, 0, 100);
-    }
-
     if (menu === true) {
         menuState();
     } else if (makeNewMap === true) {

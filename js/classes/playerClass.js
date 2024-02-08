@@ -127,7 +127,7 @@ player.prototype.drawGridHidden = function () {
                 );
             } else {
                 if (
-                    sunkShipSize === this.shipName[i].size &&
+                    sunkShipId === this.shipName[i].id &&
                     triggerShipSunkAlert === true &&
                     ((this.playerIs === 1 && playerOneTurn === false) ||
                         (this.playerIs === 2 && playerOneTurn == true)) &&
@@ -302,15 +302,15 @@ player.prototype.initializeGrid = function () {
     this.currLife = [2, 3, 3, 4, 5];
     this.ship = [
         //patrolBoat :
-        { begin: { x: 0, y: 0 }, end: { x: 0, y: 0 } },
+        { begin: { x: 0, y: 0 }, end: { x: 0, y: 0 }, id: 1 },
         //submarine  :
-        { begin: { x: 0, y: 0 }, end: { x: 0, y: 0 } },
+        { begin: { x: 0, y: 0 }, end: { x: 0, y: 0 }, id: 2 },
         //destroyer  :
-        { begin: { x: 0, y: 0 }, end: { x: 0, y: 0 } },
+        { begin: { x: 0, y: 0 }, end: { x: 0, y: 0 }, id: 3 },
         //battleship :
-        { begin: { x: 0, y: 0 }, end: { x: 0, y: 0 } },
+        { begin: { x: 0, y: 0 }, end: { x: 0, y: 0 }, id: 4 },
         //aircraftCarrier :
-        { begin: { x: 0, y: 0 }, end: { x: 0, y: 0 } },
+        { begin: { x: 0, y: 0 }, end: { x: 0, y: 0 }, id: 5 },
     ];
 
     this.sendHtppRequest = true;
@@ -396,8 +396,8 @@ player.prototype.play = function (playerIs) {
                             this.currLife[this.gridActual[i - 1][j - 1] - 1]--;
                             if (this.currLife[this.gridActual[i - 1][j - 1] - 1] === 0) {
                                 triggerShipSunkAlert = true;
-                                sunkShipSize =
-                                    this.shipName[this.gridActual[i - 1][j - 1] - 1].size;
+                                sunkShipId =
+                                    this.shipName[this.gridActual[i - 1][j - 1] - 1].id;
                             } else {
                                 triggerShipHitAlert = true;
                             }

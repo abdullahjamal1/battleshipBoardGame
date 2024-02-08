@@ -36,16 +36,13 @@ var winStateCall = function () {
             bot.drawGridActual();
 
             if (!statTableUpdated) {
+                // average turns to win
+                statTable[statisticsEnum.row.Player1][statisticsEnum.col.avgTurnsToWin] = roundTo((statTable[statisticsEnum.row.Player1][statisticsEnum.col.avgTurnsToWin] * statTable[statisticsEnum.row.Player1][statisticsEnum.col.matchesWon] + player1.turn) / (statTable[statisticsEnum.row.Player1][statisticsEnum.col.matchesWon] + 1));
 
                 // opponent loses match
                 statTable[statisticsEnum.row.botPlayer][statisticsEnum.col.matchesLost]++;
-
                 // matches won by player
                 statTable[statisticsEnum.row.Player1][statisticsEnum.col.matchesWon]++;
-
-                // average turns to win
-                statTable[statisticsEnum.row.Player1][statisticsEnum.col.avgTurnsToWin] += player1.turn;
-                statTable[statisticsEnum.row.Player1][statisticsEnum.col.avgTurnsToWin] = roundTo(statTable[statisticsEnum.row.Player1][statisticsEnum.col.avgTurnsToWin] / statTable[statisticsEnum.row.Player1][statisticsEnum.col.matchesWon]);
 
                 // win percentage
                 statTable[statisticsEnum.row.Player1][statisticsEnum.col.winPercentage] = roundTo((statTable[statisticsEnum.row.Player1][statisticsEnum.col.matchesWon] / (statTable[statisticsEnum.row.Player1][statisticsEnum.col.matchesWon] + statTable[statisticsEnum.row.Player1][statisticsEnum.col.matchesLost])) * 100);
@@ -74,13 +71,11 @@ var winStateCall = function () {
 
             if (!statTableUpdated) {
 
-                statTable[statisticsEnum.row.Player2][statisticsEnum.col.matchesLost]++;
-
-                statTable[statisticsEnum.row.Player1][statisticsEnum.col.matchesWon]++;
-
                 // average turns to win
-                statTable[statisticsEnum.row.Player1][statisticsEnum.col.avgTurnsToWin] += player1.turn;
-                statTable[statisticsEnum.row.Player1][statisticsEnum.col.avgTurnsToWin] = roundTo(statTable[statisticsEnum.row.Player1][statisticsEnum.col.avgTurnsToWin] / statTable[statisticsEnum.row.Player1][statisticsEnum.col.matchesWon]);
+                statTable[statisticsEnum.row.Player1][statisticsEnum.col.avgTurnsToWin] = roundTo((statTable[statisticsEnum.row.Player1][statisticsEnum.col.avgTurnsToWin] * statTable[statisticsEnum.row.Player1][statisticsEnum.col.matchesWon] + player1.turn) / (statTable[statisticsEnum.row.Player1][statisticsEnum.col.matchesWon] + 1));
+
+                statTable[statisticsEnum.row.Player2][statisticsEnum.col.matchesLost]++;
+                statTable[statisticsEnum.row.Player1][statisticsEnum.col.matchesWon]++;
 
                 // win percentage
                 statTable[statisticsEnum.row.Player1][statisticsEnum.col.winPercentage] = roundTo((statTable[statisticsEnum.row.Player1][statisticsEnum.col.matchesWon] / (statTable[statisticsEnum.row.Player1][statisticsEnum.col.matchesWon] + statTable[statisticsEnum.row.Player1][statisticsEnum.col.matchesLost])) * 100.0);
@@ -115,12 +110,11 @@ var winStateCall = function () {
 
         if (!statTableUpdated) {
 
+            // average turns to win
+            statTable[statisticsEnum.row.Player2][statisticsEnum.col.avgTurnsToWin] = roundTo((statTable[statisticsEnum.row.Player2][statisticsEnum.col.avgTurnsToWin] * statTable[statisticsEnum.row.Player2][statisticsEnum.col.matchesWon] + player2.turn) / (statTable[statisticsEnum.row.Player2][statisticsEnum.col.matchesWon] + 1) );
+
             statTable[statisticsEnum.row.Player2][statisticsEnum.col.matchesWon]++;
             statTable[statisticsEnum.row.Player1][statisticsEnum.col.matchesLost]++;
-
-            // average turns to win
-            statTable[statisticsEnum.row.Player2][statisticsEnum.col.avgTurnsToWin] += player2.turn;
-            statTable[statisticsEnum.row.Player2][statisticsEnum.col.avgTurnsToWin] = roundTo(statTable[statisticsEnum.row.Player2][statisticsEnum.col.avgTurnsToWin] / statTable[statisticsEnum.row.Player2][statisticsEnum.col.matchesWon]);
 
             // win percentage
             statTable[statisticsEnum.row.Player2][statisticsEnum.col.winPercentage] = roundTo((statTable[statisticsEnum.row.Player2][statisticsEnum.col.matchesWon] / (statTable[statisticsEnum.row.Player2][statisticsEnum.col.matchesWon] + statTable[statisticsEnum.row.Player2][statisticsEnum.col.matchesLost])) * 100.0);
@@ -158,12 +152,10 @@ var winStateCall = function () {
 
         if (statTableUpdated === false) {
 
+            // average turns to win
+            statTable[statisticsEnum.row.botPlayer][statisticsEnum.col.avgTurnsToWin] = roundTo((statTable[statisticsEnum.row.botPlayer][statisticsEnum.col.avgTurnsToWin] * statTable[statisticsEnum.row.botPlayer][statisticsEnum.col.matchesWon] + bot.turn )/( statTable[statisticsEnum.row.botPlayer][statisticsEnum.col.matchesWon] + 1 ));
             statTable[statisticsEnum.row.botPlayer][statisticsEnum.col.matchesWon]++;
             statTable[statisticsEnum.row.Player1][statisticsEnum.col.matchesLost]++;
-
-            // average turns to win
-            statTable[statisticsEnum.row.botPlayer][statisticsEnum.col.avgTurnsToWin] += bot.turn;
-            statTable[statisticsEnum.row.botPlayer][statisticsEnum.col.avgTurnsToWin] = roundTo(statTable[statisticsEnum.row.botPlayer][statisticsEnum.col.avgTurnsToWin] / statTable[statisticsEnum.row.botPlayer][statisticsEnum.col.matchesWon]);
 
             // win percentage
             statTable[statisticsEnum.row.botPlayer][statisticsEnum.col.winPercentage] = roundTo((statTable[statisticsEnum.row.botPlayer][statisticsEnum.col.matchesWon] / (statTable[statisticsEnum.row.botPlayer][statisticsEnum.col.matchesWon] + statTable[statisticsEnum.row.botPlayer][statisticsEnum.col.matchesLost])) * 100);

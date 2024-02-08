@@ -1,7 +1,7 @@
 var singlePlayerState = function () {
   // background(0, 255, 255,100);
   var backButton1 = new button("Exit", 350, 520);
-  var DensityLensButton = new button("Density Lens", 550, 520, 230);
+  var densityLensButton = new button("Density Filter", 550, 520, 230);
 
   backButton1.draw();
 
@@ -14,10 +14,10 @@ var singlePlayerState = function () {
   } else {
     player1.drawGridHidden();
 
-    DensityLensButton.draw();
-    if (DensityLensButton.insideButton()) {
+    densityLensButton.draw();
+    if (densityLensButton.insideButton()) {
       if (!mouseIsPressed) {
-        DensityLensButton.lightUpButton();
+        densityLensButton.lightUpButton();
       }
       if (mouseIsPressed) {
         densityLens = !densityLens;

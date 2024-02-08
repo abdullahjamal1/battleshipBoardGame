@@ -25,7 +25,7 @@ ________________________________________________________________________________
  * supports offline multi-player
  * supports game statistics
  * AI uses probability-density model to guess shot
- * supports density lens option to reveal how the AI works internally
+ * supports density filter option to reveal how the AI works internally
  ________________________________________________________________________________________________________
  ## Task List
  

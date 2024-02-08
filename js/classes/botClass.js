@@ -368,7 +368,7 @@ botClass.prototype.play = function () {
         this.currLife[this.gridActual[botHitX][botHitY] - 1]--;
         if (this.currLife[this.gridActual[botHitX][botHitY] - 1] <= 0) {
             triggerShipSunkAlert = true;
-            sunkShipSize = this.shipName[this.gridActual[botHitX][botHitY] - 1].size;
+            sunkShipId = this.shipName[this.gridActual[botHitX][botHitY] - 1].id;
         } else {
             triggerShipHitAlert = true;
         }

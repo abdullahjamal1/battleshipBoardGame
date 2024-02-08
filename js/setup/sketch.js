@@ -39,7 +39,7 @@ var playerSwitchingIterator = 0;
 var shipHitAlertIterator = 0;
 var triggerShipHitAlert = false;
 var triggerShipSunkAlert = false;
-var sunkShipSize = 0;
+var sunkShipId = -1;
 var shipSunkAlertIterator = 0;
 
 var Base64 = {
