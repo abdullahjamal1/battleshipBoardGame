@@ -2,10 +2,10 @@
 // inherit attributes from ship class
 //   shipClass.call( this );
 // };
-var player1AutoButton = new button("Auto", 80, 450);
-var player1ConfirmButton = new button("Confirm", 280, 450);
-var player2ConfirmButton = new button("Confirm", 750, 450);
-var player2AutoButton = new button("Auto", 550, 450);
+var player1AutoButton = new button("Auto", 80, 490);
+var player1ConfirmButton = new button("Confirm", 280, 490);
+var player2ConfirmButton = new button("Confirm", 750, 490);
+var player2AutoButton = new button("Auto", 550, 490);
 
 var posX = 400,
     posY = 120;
@@ -16,6 +16,7 @@ var multiplayerButton = new button("Multiplayer", posX + 100, posY + 90, menuBut
 var instructionsButton = new button("Instructions", posX + 100, posY + 140, menuButtonWidth);
 var statisticsButton = new button("Statistics", posX + 100, posY + 190, menuButtonWidth);
 var creditsButton = new button("Credits", posX + 100, posY + 240, menuButtonWidth);
+var themeSwitchButton = new button("Light", posX + 550, 10, menuButtonWidth);
 
 var anim = new animation();
 
@@ -27,8 +28,18 @@ var anim = new animation();
 var draw = function () {
 
     scale(globalScale);
-
+    background(RGB.BACKGROUND);
     anim.animationPlay();
+
+    themeSwitchButton.draw();
+    if (themeSwitchButton.insideButton()) {
+        themeSwitchButton.lightUpButton();
+        if (mouseIsPressed) {
+            isLightTheme = !isLightTheme;
+            themeSwitchButton.txt = themeSwitchButton.txt === "Light" ? "Dark" : "Light";
+            mouseIsPressed = false;
+        }
+    }
 
     if (menu === true) {
         menuState();

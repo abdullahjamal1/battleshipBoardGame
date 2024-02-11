@@ -1,6 +1,4 @@
 var statisticsState = function () {
-  statTable = JSON.parse(Base64.decode(localStorage.getItem("stats")));
-
   // background(0, 255, 255,100);
   var backButton = new button("Back", 150, 480);
   backButton.draw();
@@ -16,13 +14,14 @@ var statisticsState = function () {
   // fill(0, 0, 0);
   // text("ONLINE", statTableX / 4 + 195, statTableY / 4 + 10, slotWidth, slotHeight);
 
-  fill(0, 180, 0, 200);
+  // fill(0, 180, 0, 200);
+  fill(RGB.BUTTON)
 
   rect(statTableX / 4 + 30, statTableY / 4 - 7, slotWidth, slotHeight);
 
   strokeWeight(1);
 
-  fill(0, 0, 0);
+  fill(RGB.BUTTON_TEXT);
   text(
     "OFFLINE",
     statTableX / 4 + 40,
@@ -30,7 +29,7 @@ var statisticsState = function () {
     slotWidth,
     slotHeight
   );
-  fill(0, 180, 0, 200);
+  fill(RGB.BUTTON);
 
   rect(
     statTableX - slotWidth,
@@ -41,7 +40,7 @@ var statisticsState = function () {
   );
   strokeWeight(2);
 
-  fill(0, 0, 0);
+  fill(RGB.BUTTON_TEXT);
 
   textSize(20);
   text(
@@ -122,9 +121,9 @@ var statisticsState = function () {
         }
       }
       if (highestValInCol) {
-        fill(144, 238, 144);
+        fill(RGB.STATS_HIGH);
       } else {
-        fill(255, 127, 127);
+        fill(RGB.STATS_LOW);
       }
 
       rect(
@@ -134,7 +133,7 @@ var statisticsState = function () {
         slotHeight
       );
 
-      fill(0, 0, 0);
+      fill(RGB.BUTTON_TEXT);
       textSize(30);
       text(
         statTable[i][j],

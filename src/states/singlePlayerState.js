@@ -1,7 +1,7 @@
 var singlePlayerState = function () {
   // background(0, 255, 255,100);
-  var backButton1 = new button("Exit", 350, 520);
-  var densityLensButton = new button("Density Filter", 550, 520, 230);
+  var backButton1 = new button("Exit", 10, 10);
+  var densityLensButton = new button("Density Filter", 210, 10, 230);
 
   backButton1.draw();
 

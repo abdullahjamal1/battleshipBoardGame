@@ -35,15 +35,22 @@ botClass.prototype.drawProbabilityDensityGrid = function () {
     var i = 1,
         j = 1;
     var indent = 150;
+    var indent_y = 120;
 
     for (i = 0; i < 10; i++) {
         for (j = 0; j < 10; j++) {
             if (this.grid[i][j] > 2) {
-                fill(this.grid[i][j] * 25, 0, 0);
-                rect(indent + 550 + 35 * (i + 1), 80 + 35 * (j + 1), 35, 35);
+                if(!isLightTheme){
+                    fill(this.grid[i][j] * 25, 0, 0);
+                }
+                else{
+                    fill(0, 0, this.grid[i][j] * 25);
+                }
+                rect(indent + 550 + 35 * (i + 1), indent_y + 35 * (j + 1), 35, 35);
             } else if (this.grid[i][j] === 2) {
-                fill(0, 0, 0);
-                rect(indent + 550 + 35 * (i + 1), 80 + 35 * (j + 1), 35, 35);
+                // fill(0, 0, 0);
+                fill(19, 41, 75);
+                rect(indent + 550 + 35 * (i + 1), indent_y + 35 * (j + 1), 35, 35);
             }
         }
     }

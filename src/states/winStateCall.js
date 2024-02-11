@@ -1,4 +1,3 @@
-
 const statisticsEnum = {
     row: {
         Player1: 0,
@@ -16,8 +15,12 @@ const statisticsEnum = {
 };
 
 function roundTo(num) {
-
     return Math.round((num + Number.EPSILON) * 100) / 100;
+}
+
+async function updateStatTable(statTable){
+    await setItem(STORAGE_KEYS.STATS, statTable);
+    statTableUpdated = true;
 }
 
 var winStateCall = function () {
@@ -28,7 +31,7 @@ var winStateCall = function () {
     if (player1.win === true) {
 
         textSize(40);
-        text("Player 1 Wins !!! Turns: " + player1.turn, 400, 470, 400, 400);
+        text("Player 1 Wins !!! Turns: " + player1.turn, 500, 470, 400, 400);
 
 
         if (singlePlayerWin === true) {
@@ -62,7 +65,7 @@ var winStateCall = function () {
 
                 statTable[statisticsEnum.row.Player1][statisticsEnum.col.shipsLost] += bot.countShipStatus("destroyed");
                 statTable[statisticsEnum.row.botPlayer][statisticsEnum.col.shipsDestroyed] += bot.countShipStatus("destroyed");
-                statTableUpdated = true;
+                updateStatTable(statTable)
             }
         }
         else {
@@ -99,14 +102,14 @@ var winStateCall = function () {
 
                 statTable[statisticsEnum.row.Player1][statisticsEnum.col.shipsLost] += numberOfShipsDestroyed;
                 statTable[statisticsEnum.row.Player2][statisticsEnum.col.shipsDestroyed] += numberOfShipsDestroyed;
-                statTableUpdated = true;
+                updateStatTable(statTable)
             }
         }
     }
     else if (player2.win === true) {
 
         textSize(40);
-        text("Player 2 Wins !!! Turns : " + player2.turn, 400, 470, 400, 400);
+        text("Player 2 Wins !!! Turns : " + player2.turn, 500, 470, 400, 400);
 
         if (!statTableUpdated) {
 
@@ -140,15 +143,14 @@ var winStateCall = function () {
             statTable[statisticsEnum.row.Player2][statisticsEnum.col.shipsLost] += numberOfShipsDestroyed;
             statTable[statisticsEnum.row.Player1][statisticsEnum.col.shipsDestroyed] += numberOfShipsDestroyed;
 
-            statTableUpdated = true;
-
+            updateStatTable(statTable)
         }
         player1.drawGridActual();
     }
     else {
 
         textSize(40);
-        text("BOT Wins !!! turns: " + bot.turn, 400, 460, 400, 400);
+        text("BOT Wins !!! turns: " + bot.turn, 500, 460, 400, 400);
 
         if (statTableUpdated === false) {
 
@@ -175,13 +177,11 @@ var winStateCall = function () {
             statTable[statisticsEnum.row.botPlayer][statisticsEnum.col.shipsLost] += numberOfShipsDestroyed;
             statTable[statisticsEnum.row.Player1][statisticsEnum.col.shipsDestroyed] += numberOfShipsDestroyed;
 
-            statTableUpdated = true;
+            updateStatTable(statTable)
         }
 
         player1.drawGridActual();
     }
-
-    localStorage.setItem("stats", Base64.encode(JSON.stringify(statTable)));
 
     var backButton = new button("Menu", 150, 500);
     backButton.draw();

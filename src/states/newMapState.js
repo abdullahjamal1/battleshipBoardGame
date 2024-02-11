@@ -71,12 +71,14 @@ var drawGeneratedMap = function (randomMap) {
 
     for (var i = 0; i < 10; i++) {
         for (var j = 0; j < 10; j++) {
-            fill(64, 54, 255);
+            fill(RGB.BOARD_OCEAN_BLOCK);
+            // fill(22, 92, 125);
 
             if (randomMap[i][j] !== ISLAND) {
                 rect(indent + 50 + 30 * i, 50 + 30 * j, 30, 30);
             } else {
-                fill(255, 212, 128);
+                // fill(255, 212, 128);
+                fill(RGB.BOARD_ISLAND_BLOCK);
                 rect(indent + 50 + 30 * i, 50 + 30 * j, 30, 30);
             }
         }
