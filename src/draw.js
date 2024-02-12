@@ -4,8 +4,8 @@
 // };
 var player1AutoButton = new button("Auto", 80, 490);
 var player1ConfirmButton = new button("Confirm", 280, 490);
-var player2ConfirmButton = new button("Confirm", 750, 490);
-var player2AutoButton = new button("Auto", 550, 490);
+var player2ConfirmButton = new button("Confirm", 930, 490);
+var player2AutoButton = new button("Auto", 730, 490);
 
 var posX = 400,
     posY = 120;

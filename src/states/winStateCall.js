@@ -31,7 +31,7 @@ var winStateCall = function () {
     if (player1.win === true) {
 
         textSize(40);
-        text("Player 1 Wins !!! Turns: " + player1.turn, 500, 470, 400, 400);
+        text("Player 1 Wins !!! Turns: " + player1.turn, 400, 470, 400, 400);
 
 
         if (singlePlayerWin === true) {

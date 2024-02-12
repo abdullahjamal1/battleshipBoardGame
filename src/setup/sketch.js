@@ -46,34 +46,34 @@ var isLightTheme = true;
 
 const RGB = {
   get BACKGROUND() {
-    return isLightTheme ? 'rgb(19, 41, 75)': 'rgb(19, 41, 75)';
+    return isLightTheme ? 'rgb(19, 41, 75)': 'rgb(22, 92, 125)';
   },
   get BUTTON() {
-    return isLightTheme ? 'rgba(54, 157, 160, 1.0)': 'rgba(54, 157, 160, 1.0)';
+    return isLightTheme ? 'rgba(54, 157, 160, 1.0)': 'rgba(198, 218, 231, 1.0)';
   },
   get SHIP_HIT() {
     return isLightTheme ? 'rgb(210, 43, 43)': 'rgb(210, 43, 43)';
   },
   get SHIP_MISS() {
-    return isLightTheme ? 'rgb(54, 157, 160)': 'rgb(54, 157, 160)';
+    return isLightTheme ? 'rgb(54, 157, 160)': 'rgb(198, 218, 231)';
   },
   get BUTTON_TEXT() {
     return isLightTheme ? 'rgb(0, 0, 0)': 'rgb(0, 0, 0)';
   },
   get BOARD_OCEAN_BLOCK() {
-    return isLightTheme ? 'rgb(22, 92, 125)': 'rgb(211, 187, 168)';
+    return isLightTheme ? 'rgb(22, 92, 125)': 'rgb(54, 157, 160)';
   },
   get BOARD_OCEAN_BLOCK_HIGHLIGHT() {
-    return isLightTheme ? 'rgba(31, 126, 171, 0.8)': 'rgba(31, 126, 171, 0.8)';
+    return isLightTheme ? 'rgba(31, 126, 171, 0.8)': 'rgba(70, 170, 190, 0.8)';
   },
   get BOARD_ISLAND_BLOCK() {
-    return isLightTheme ? 'rgb(211, 187, 168)': 'rgb(22, 92, 125)';
+    return isLightTheme ? 'rgb(211, 187, 168)': 'rgb(228, 213, 211)';
   },
   get STATS_HIGH() {
-    return isLightTheme ? 'rgb(211, 187, 168)': 'rgb(144, 238, 144)';
+    return isLightTheme ? 'rgb(211, 187, 168)': 'rgb(211, 187, 168)';
   },
   get STATS_LOW() {
-    return isLightTheme ? 'rgb(228, 213, 211)': 'rgb(255, 127, 127)';
+    return isLightTheme ? 'rgb(228, 213, 211)': 'rgb(228, 213, 211)';
   }
 }
 
