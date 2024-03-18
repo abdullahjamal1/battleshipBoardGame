@@ -1,14 +1,27 @@
 {
   "name": "battleshipboardgame",
   "version": "1.0.0",
-  "description": "battleship board game",
+  "description": "Battleship Board Game",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack serve --open",
+    "build": "webpack --mode production",
+    "release": "bestzip extension.zip assets css dist manifest.json"
   },
   "author": "Abdullah Jamal",
   "license": "ISC",
   "dependencies": {
     "p5": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.0.263",
+    "@types/p5": "^1.7.6",
+    "bestzip": "^2.2.1",
+    "ts-loader": "^9.3.0",
+    "typescript": "^4.6.4",
+    "webpack": "^5.72.1",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.9.0"
   }
 }

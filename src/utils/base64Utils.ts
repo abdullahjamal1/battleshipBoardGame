@@ -1,9 +1,9 @@
-var Base64 = {
+let Base64 = {
     _keyStr: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
-    encode: function (e) {
-      var t = "";
-      var n, r, i, s, o, u, a;
-      var f = 0;
+    encode: function (e: string) {
+      let t = "";
+      let n, r, i, s, o, u, a;
+      let f = 0;
       e = Base64._utf8_encode(e);
       while (f < e.length) {
         n = e.charCodeAt(f++);
@@ -27,11 +27,11 @@ var Base64 = {
       }
       return t;
     },
-    decode: function (e) {
-      var t = "";
-      var n, r, i;
-      var s, o, u, a;
-      var f = 0;
+    decode: function (e: string) {
+      let t = "";
+      let n, r, i;
+      let s, o, u, a;
+      let f = 0;
       e = e.replace(/[^A-Za-z0-9\+\/\=]/g, "");
       while (f < e.length) {
         s = this._keyStr.indexOf(e.charAt(f++));
@@ -52,11 +52,11 @@ var Base64 = {
       t = Base64._utf8_decode(t);
       return t;
     },
-    _utf8_encode: function (e) {
+    _utf8_encode: function (e: string) {
       e = e.replace(/\r\n/g, "\n");
-      var t = "";
-      for (var n = 0; n < e.length; n++) {
-        var r = e.charCodeAt(n);
+      let t = "";
+      for (let n = 0; n < e.length; n++) {
+        let r = e.charCodeAt(n);
         if (r < 128) {
           t += String.fromCharCode(r);
         } else if (r > 127 && r < 2048) {
@@ -70,10 +70,13 @@ var Base64 = {
       }
       return t;
     },
-    _utf8_decode: function (e) {
-      var t = "";
-      var n = 0;
-      var r = (c1 = c2 = 0);
+    _utf8_decode: function (e: string) {
+      let t = "";
+      let n = 0;
+      let c1 = 0;
+      let c2 = 0;
+      let c3;
+      let r = (c1 = c2 = 0);
       while (n < e.length) {
         r = e.charCodeAt(n);
         if (r < 128) {
@@ -95,4 +98,5 @@ var Base64 = {
       return t;
     },
   };
+export default Base64;
   

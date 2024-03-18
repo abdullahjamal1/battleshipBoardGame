@@ -1,9 +1,9 @@
 {
   "name": "Battleship Game - Island Edition",
-  "version": "0.3",
+  "version": "0.4",
   "description": "Classic Battleship board game with special island edition and tough AI for your browser.",
   "action": {
-    "default_popup": "index.html",
+    "default_popup": "dist/index.html",
     "default_title": "Play Battleship",
     "default_icon": {
       "128": "assets/i128.png",

@@ -1,3 +1,8 @@
+import Button from '../classes/Button';
+import {p5} from '../index'
+import { setItem, STORAGE_KEYS } from '../service/storage';
+import { GameStateEnum, initPlayers, players, sessionGameState, statTable } from '../setup/sketch';
+
 const statisticsEnum = {
     row: {
         Player1: 0,
@@ -14,33 +19,33 @@ const statisticsEnum = {
     }
 };
 
-function roundTo(num) {
+function roundTo(num: number) {
     return Math.round((num + Number.EPSILON) * 100) / 100;
 }
 
-async function updateStatTable(statTable){
+async function updateStatTable(statTable: any){
     await setItem(STORAGE_KEYS.STATS, statTable);
-    statTableUpdated = true;
+    sessionGameState.statTableUpdated = true;
 }
 
-var winStateCall = function () {
+let winStateCall = function () {
     // background(0, 0, 0);
-    fill(240, 218, 240);
+    p5.fill(240, 218, 240);
 
     // display victory message too
-    if (player1.win === true) {
+    if (players.player1.win === true) {
 
-        textSize(40);
-        text("Player 1 Wins !!! Turns: " + player1.turn, 400, 470, 400, 400);
+        p5.textSize(40);
+        p5.text("Player 1 Wins !!! Turns: " + players.player1.turn, 400, 470, 400, 400);
 
 
-        if (singlePlayerWin === true) {
+        if (sessionGameState.singlePlayerWin === true) {
 
-            bot.drawGridActual();
+            players.bot.drawGridActual();
 
-            if (!statTableUpdated) {
+            if (!sessionGameState.statTableUpdated) {
                 // average turns to win
-                statTable[statisticsEnum.row.Player1][statisticsEnum.col.avgTurnsToWin] = roundTo((statTable[statisticsEnum.row.Player1][statisticsEnum.col.avgTurnsToWin] * statTable[statisticsEnum.row.Player1][statisticsEnum.col.matchesWon] + player1.turn) / (statTable[statisticsEnum.row.Player1][statisticsEnum.col.matchesWon] + 1));
+                statTable[statisticsEnum.row.Player1][statisticsEnum.col.avgTurnsToWin] = roundTo((statTable[statisticsEnum.row.Player1][statisticsEnum.col.avgTurnsToWin] * statTable[statisticsEnum.row.Player1][statisticsEnum.col.matchesWon] + players.player1.turn) / (statTable[statisticsEnum.row.Player1][statisticsEnum.col.matchesWon] + 1));
 
                 // opponent loses match
                 statTable[statisticsEnum.row.botPlayer][statisticsEnum.col.matchesLost]++;
@@ -52,9 +57,9 @@ var winStateCall = function () {
                 statTable[statisticsEnum.row.botPlayer][statisticsEnum.col.winPercentage] = roundTo((statTable[statisticsEnum.row.botPlayer][statisticsEnum.col.matchesWon] / (statTable[statisticsEnum.row.botPlayer][statisticsEnum.col.matchesWon] + statTable[statisticsEnum.row.botPlayer][statisticsEnum.col.matchesLost])) * 100);
                 // number of ships destroyed
 
-                var numberOfShipsLost = 0;
-                for (var i = 0; i < 5; i++) {
-                    if (player1.currLife[i] === 0) {
+                let numberOfShipsLost = 0;
+                for (let i = 0; i < 5; i++) {
+                    if (players.player1.currLife[i] === 0) {
                         numberOfShipsLost++;
                     }
                 }
@@ -63,19 +68,19 @@ var winStateCall = function () {
                 statTable[statisticsEnum.row.botPlayer][statisticsEnum.col.shipsLost] += numberOfShipsLost;
                 // number of ships lost
 
-                statTable[statisticsEnum.row.Player1][statisticsEnum.col.shipsLost] += bot.countShipStatus("destroyed");
-                statTable[statisticsEnum.row.botPlayer][statisticsEnum.col.shipsDestroyed] += bot.countShipStatus("destroyed");
+                statTable[statisticsEnum.row.Player1][statisticsEnum.col.shipsLost] += players.bot.countShipStatus("destroyed");
+                statTable[statisticsEnum.row.botPlayer][statisticsEnum.col.shipsDestroyed] += players.bot.countShipStatus("destroyed");
                 updateStatTable(statTable)
             }
         }
         else {
 
-            player2.drawGridActual();
+            players.player2.drawGridActual();
 
-            if (!statTableUpdated) {
+            if (!sessionGameState.statTableUpdated) {
 
                 // average turns to win
-                statTable[statisticsEnum.row.Player1][statisticsEnum.col.avgTurnsToWin] = roundTo((statTable[statisticsEnum.row.Player1][statisticsEnum.col.avgTurnsToWin] * statTable[statisticsEnum.row.Player1][statisticsEnum.col.matchesWon] + player1.turn) / (statTable[statisticsEnum.row.Player1][statisticsEnum.col.matchesWon] + 1));
+                statTable[statisticsEnum.row.Player1][statisticsEnum.col.avgTurnsToWin] = roundTo((statTable[statisticsEnum.row.Player1][statisticsEnum.col.avgTurnsToWin] * statTable[statisticsEnum.row.Player1][statisticsEnum.col.matchesWon] + players.player1.turn) / (statTable[statisticsEnum.row.Player1][statisticsEnum.col.matchesWon] + 1));
 
                 statTable[statisticsEnum.row.Player2][statisticsEnum.col.matchesLost]++;
                 statTable[statisticsEnum.row.Player1][statisticsEnum.col.matchesWon]++;
@@ -84,15 +89,15 @@ var winStateCall = function () {
                 statTable[statisticsEnum.row.Player1][statisticsEnum.col.winPercentage] = roundTo((statTable[statisticsEnum.row.Player1][statisticsEnum.col.matchesWon] / (statTable[statisticsEnum.row.Player1][statisticsEnum.col.matchesWon] + statTable[statisticsEnum.row.Player1][statisticsEnum.col.matchesLost])) * 100.0);
                 statTable[statisticsEnum.row.Player2][statisticsEnum.col.winPercentage] = roundTo((statTable[statisticsEnum.row.Player2][statisticsEnum.col.matchesWon] / (statTable[statisticsEnum.row.Player2][statisticsEnum.col.matchesWon] + statTable[statisticsEnum.row.Player2][statisticsEnum.col.matchesLost])) * 100.0);
                 // number of ships destroyed
-                var numberOfShipsDestroyed = 0;
-                for (var i = 0; i < 5; i++) {
-                    if (player2.currLife[i] === 0) {
+                let numberOfShipsDestroyed = 0;
+                for (let i = 0; i < 5; i++) {
+                    if (players.player2.currLife[i] === 0) {
                         numberOfShipsDestroyed++;
                     }
                 }
-                var numberOfShipsLost = 0;
-                for (var i = 0; i < 5; i++) {
-                    if (player1.currLife[i] === 0) {
+                let numberOfShipsLost = 0;
+                for (let i = 0; i < 5; i++) {
+                    if (players.player1.currLife[i] === 0) {
                         numberOfShipsLost++;
                     }
                 }
@@ -106,15 +111,15 @@ var winStateCall = function () {
             }
         }
     }
-    else if (player2.win === true) {
+    else if (players.player2.win === true) {
 
-        textSize(40);
-        text("Player 2 Wins !!! Turns : " + player2.turn, 500, 470, 400, 400);
+        p5.textSize(40);
+        p5.text("Player 2 Wins !!! Turns : " + players.player2.turn, 500, 470, 400, 400);
 
-        if (!statTableUpdated) {
+        if (!sessionGameState.statTableUpdated) {
 
             // average turns to win
-            statTable[statisticsEnum.row.Player2][statisticsEnum.col.avgTurnsToWin] = roundTo((statTable[statisticsEnum.row.Player2][statisticsEnum.col.avgTurnsToWin] * statTable[statisticsEnum.row.Player2][statisticsEnum.col.matchesWon] + player2.turn) / (statTable[statisticsEnum.row.Player2][statisticsEnum.col.matchesWon] + 1) );
+            statTable[statisticsEnum.row.Player2][statisticsEnum.col.avgTurnsToWin] = roundTo((statTable[statisticsEnum.row.Player2][statisticsEnum.col.avgTurnsToWin] * statTable[statisticsEnum.row.Player2][statisticsEnum.col.matchesWon] + players.player2.turn) / (statTable[statisticsEnum.row.Player2][statisticsEnum.col.matchesWon] + 1) );
 
             statTable[statisticsEnum.row.Player2][statisticsEnum.col.matchesWon]++;
             statTable[statisticsEnum.row.Player1][statisticsEnum.col.matchesLost]++;
@@ -123,15 +128,15 @@ var winStateCall = function () {
             statTable[statisticsEnum.row.Player2][statisticsEnum.col.winPercentage] = roundTo((statTable[statisticsEnum.row.Player2][statisticsEnum.col.matchesWon] / (statTable[statisticsEnum.row.Player2][statisticsEnum.col.matchesWon] + statTable[statisticsEnum.row.Player2][statisticsEnum.col.matchesLost])) * 100.0);
             statTable[statisticsEnum.row.Player1][statisticsEnum.col.winPercentage] = roundTo((statTable[statisticsEnum.row.Player1][statisticsEnum.col.matchesWon] / (statTable[statisticsEnum.row.Player1][statisticsEnum.col.matchesWon] + statTable[statisticsEnum.row.Player1][statisticsEnum.col.matchesLost])) * 100.0);
             // number of ships destroyed
-            var numberOfShipsDestroyed = 0;
-            for (var i = 0; i < 5; i++) {
-                if (player1.currLife[i] === 0) {
+            let numberOfShipsDestroyed = 0;
+            for (let i = 0; i < 5; i++) {
+                if (players.player1.currLife[i] === 0) {
                     numberOfShipsDestroyed++;
                 }
             }
-            var numberOfShipsLost = 0;
-            for (var i = 0; i < 5; i++) {
-                if (player2.currLife[i] === 0) {
+            let numberOfShipsLost = 0;
+            for (let i = 0; i < 5; i++) {
+                if (players.player2.currLife[i] === 0) {
                     numberOfShipsLost++;
                 }
             }
@@ -145,17 +150,17 @@ var winStateCall = function () {
 
             updateStatTable(statTable)
         }
-        player1.drawGridActual();
+        players.player1.drawGridActual();
     }
     else {
 
-        textSize(40);
-        text("BOT Wins !!! turns: " + bot.turn, 500, 460, 400, 400);
+        p5.textSize(40);
+        p5.text("BOT Wins !!! turns: " + players.bot.turn, 500, 460, 400, 400);
 
-        if (statTableUpdated === false) {
+        if (sessionGameState.statTableUpdated === false) {
 
             // average turns to win
-            statTable[statisticsEnum.row.botPlayer][statisticsEnum.col.avgTurnsToWin] = roundTo((statTable[statisticsEnum.row.botPlayer][statisticsEnum.col.avgTurnsToWin] * statTable[statisticsEnum.row.botPlayer][statisticsEnum.col.matchesWon] + bot.turn )/( statTable[statisticsEnum.row.botPlayer][statisticsEnum.col.matchesWon] + 1 ));
+            statTable[statisticsEnum.row.botPlayer][statisticsEnum.col.avgTurnsToWin] = roundTo((statTable[statisticsEnum.row.botPlayer][statisticsEnum.col.avgTurnsToWin] * statTable[statisticsEnum.row.botPlayer][statisticsEnum.col.matchesWon] + players.bot.turn )/( statTable[statisticsEnum.row.botPlayer][statisticsEnum.col.matchesWon] + 1 ));
             statTable[statisticsEnum.row.botPlayer][statisticsEnum.col.matchesWon]++;
             statTable[statisticsEnum.row.Player1][statisticsEnum.col.matchesLost]++;
 
@@ -163,15 +168,15 @@ var winStateCall = function () {
             statTable[statisticsEnum.row.botPlayer][statisticsEnum.col.winPercentage] = roundTo((statTable[statisticsEnum.row.botPlayer][statisticsEnum.col.matchesWon] / (statTable[statisticsEnum.row.botPlayer][statisticsEnum.col.matchesWon] + statTable[statisticsEnum.row.botPlayer][statisticsEnum.col.matchesLost])) * 100);
             statTable[statisticsEnum.row.Player1][statisticsEnum.col.winPercentage] = roundTo((statTable[statisticsEnum.row.Player1][statisticsEnum.col.matchesWon] / (statTable[statisticsEnum.row.Player1][statisticsEnum.col.matchesWon] + statTable[statisticsEnum.row.Player1][statisticsEnum.col.matchesLost])) * 100);
             // number of ships destroyed
-            var numberOfShipsDestroyed = 0;
-            for (var i = 0; i < 5; i++) {
-                if (player1.currLife[i] === 0) {
+            let numberOfShipsDestroyed = 0;
+            for (let i = 0; i < 5; i++) {
+                if (players.player1.currLife[i] === 0) {
                     numberOfShipsDestroyed++;
                 }
             }
 
-            statTable[statisticsEnum.row.botPlayer][statisticsEnum.col.shipsDestroyed] += bot.countShipStatus("lost");;
-            statTable[statisticsEnum.row.Player1][statisticsEnum.col.shipsLost] += bot.countShipStatus("lost");;
+            statTable[statisticsEnum.row.botPlayer][statisticsEnum.col.shipsDestroyed] += players.bot.countShipStatus("lost");;
+            statTable[statisticsEnum.row.Player1][statisticsEnum.col.shipsLost] += players.bot.countShipStatus("lost");;
             // number of ships lost
 
             statTable[statisticsEnum.row.botPlayer][statisticsEnum.col.shipsLost] += numberOfShipsDestroyed;
@@ -180,30 +185,25 @@ var winStateCall = function () {
             updateStatTable(statTable)
         }
 
-        player1.drawGridActual();
+        players.player1.drawGridActual();
     }
 
-    var backButton = new button("Menu", 150, 500);
+    let backButton = new Button("Menu", 150, 500);
     backButton.draw();
 
     if (backButton.insideButton()) {
-        //check to see if the mouse is pressed
-        if (!mouseIsPressed) {
+        if (!p5.mouseIsPressed) {
 
             backButton.lightUpButton();
         }
-        if (mouseIsPressed) {
-            //if mouse is pressed go to menu
-            winState = false;
-            menu = true;
-            statTableUpdated = false;
+        if (p5.mouseIsPressed) {
 
-            singlePlayerWin = false;
-            player1.initializeGrid();
-            player2.initializeGrid();
-            bot.initializeGrid();
-            createNewMultiplayerObject();
-            createNewSinglePlayerObject();
+            sessionGameState.currentState = GameStateEnum.Menu;
+
+            sessionGameState.statTableUpdated = false;
+            sessionGameState.singlePlayerWin = false;
+            initPlayers();
         }
     }
 };
+export default winStateCall;

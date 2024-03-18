@@ -1,8 +1,8 @@
-var multiPlayerOnlineState = function () {
+let multiPlayerOnlineState = function () {
     // coming soon
-    var backButton1 = new button("back", 400, 450);
+    let backButton1 = new button("back", 400, 450);
     backButton1.draw();
-    var connectButton = new button("connect", 600, 250);
+    let connectButton = new button("connect", 600, 250);
 
     // draws 10*10 grid for player 1
     player1.drawGridActual();
@@ -153,3 +153,4 @@ var multiPlayerOnlineState = function () {
         }
     }
 };
+export default multiPlayerOnlineState;

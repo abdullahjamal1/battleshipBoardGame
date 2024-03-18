@@ -1,17 +1,23 @@
-var generateIslands = function (islandsCount) {
-    var stack = { first: [], second: [] };
+import Button from "../classes/Button";
+import { ISLAND, RGB_THEME } from "../constants/constants";
+import {p5} from '../index'
+import { GameStateEnum, randomMap, sessionGameState, updateCurrentGameState } from "../setup/sketch";
 
-    stack.first.push(floor(random(0, 10)));
-    stack.second.push(floor(random(0, 10)));
+function generateIslands(islandsCount: number) {
+    let stack: any = { first: [], second: [] };
+
+    stack.first.push(Math.floor(p5.random(0, 10)));
+    stack.second.push(Math.floor(p5.random(0, 10)));
+
+    let nodeX = Math.floor(p5.random(0, 10));
+    let nodeY = Math.floor(p5.random(0, 10));
 
     while (islandsCount > 0) {
-        var nodeX;
-        var nodeY;
 
         if (stack.first.length === 0 && islandsCount > 0) {
             while (randomMap[nodeX][nodeY] === ISLAND) {
-                nodeX = floor(random(0, 10));
-                nodeY = floor(random(0, 10));
+                nodeX = Math.floor(p5.random(0, 10));
+                nodeY = Math.floor(p5.random(0, 10));
             }
             stack.first.push(nodeX);
             stack.second.push(nodeY);
@@ -33,7 +39,7 @@ var generateIslands = function (islandsCount) {
 
         islandsCount--;
 
-        var ar = [[], []];
+        let ar: any[][] = [[], []];
 
         if (nodeX + 1 < 10 && randomMap[nodeX + 1][nodeY] !== ISLAND) {
             ar[0].push(nodeX + 1);
@@ -52,7 +58,7 @@ var generateIslands = function (islandsCount) {
             ar[1].push(nodeY - 1);
         }
 
-        var randNumber = floor(random(0, ar[0].length));
+        let randNumber = Math.floor(p5.random(0, ar[0].length));
 
         if (ar[0].length === 0) {
             continue;
@@ -66,46 +72,47 @@ var generateIslands = function (islandsCount) {
     }
 };
 
-var drawGeneratedMap = function (randomMap) {
-    var indent = 340;
+function drawGeneratedMap(randomMap: any[]) {
+    let indent = 340;
 
-    for (var i = 0; i < 10; i++) {
-        for (var j = 0; j < 10; j++) {
-            fill(RGB.BOARD_OCEAN_BLOCK);
+    for (let i = 0; i < 10; i++) {
+        for (let j = 0; j < 10; j++) {
+            p5.fill(RGB_THEME.BOARD_OCEAN_BLOCK);
             // fill(22, 92, 125);
 
             if (randomMap[i][j] !== ISLAND) {
-                rect(indent + 50 + 30 * i, 50 + 30 * j, 30, 30);
+                p5.rect(indent + 50 + 30 * i, 50 + 30 * j, 30, 30);
             } else {
                 // fill(255, 212, 128);
-                fill(RGB.BOARD_ISLAND_BLOCK);
-                rect(indent + 50 + 30 * i, 50 + 30 * j, 30, 30);
+                p5.fill(RGB_THEME.BOARD_ISLAND_BLOCK);
+                p5.rect(indent + 50 + 30 * i, 50 + 30 * j, 30, 30);
             }
         }
     }
 };
 
-var islandsCount = 0;
+const islandX = 600,
+islandY = 385;
 
-var newMapState = function () {
-    var backButton = new button("Back", 250, 450);
-    var newMapButton = new button("New Map", 450, 450);
-    var startButton = new button("Start", 650, 450);
+let islandsCount = 0;
+let backButton = new Button("Back", 250, 450);
+let newMapButton = new Button("New Map", 450, 450);
+let startButton = new Button("Start", 650, 450);
+let leftArrow = new Button("<", islandX + 5, islandY + 5, 35, 35);
+let rightArrow = new Button(">", islandX + 120 - 35, islandY + 5, 35, 35);
 
-    var islandX = 600,
-        islandY = 385;
-    var islandsCountButton = new button(
+function newMapState() {
+
+    let islandsCountButton = new Button(
         "    " + islandsCount,
         islandX,
         islandY,
         125,
         45
     );
-    var leftArrow = new button("<", islandX + 5, islandY + 5, 35, 35);
-    var rightArrow = new button(">", islandX + 120 - 35, islandY + 5, 35, 35);
 
-    fill(255, 255, 255);
-    text("Island Blocks:", islandX - 200, islandY + 7, 200, 40);
+    p5.fill(255, 255, 255);
+    p5.text("Island Blocks:", islandX - 200, islandY + 7, 200, 40);
 
     backButton.draw();
     startButton.draw();
@@ -117,77 +124,72 @@ var newMapState = function () {
     drawGeneratedMap(randomMap);
 
     if (leftArrow.insideButton()) {
-        if (!mouseIsPressed) {
+        if (!p5.mouseIsPressed) {
             leftArrow.lightUpButton();
         } else {
             if (islandsCount > 0) {
                 islandsCount--;
             }
-            mouseIsPressed = false;
+            p5.mouseIsPressed = false;
         }
     }
 
     if (rightArrow.insideButton()) {
-        if (!mouseIsPressed) {
+        if (!p5.mouseIsPressed) {
             rightArrow.lightUpButton();
         } else {
             if (islandsCount < 25) {
                 islandsCount++;
-                mouseIsPressed = false;
+                p5.mouseIsPressed = false;
             }
         }
     }
 
     if (startButton.insideButton()) {
         //check to see if the mouse is pressed
-        if (!mouseIsPressed) {
-            //if mouse is not pressed then light up button
+        if (!p5.mouseIsPressed) {
             startButton.lightUpButton();
         }
-        if (mouseIsPressed) {
-            //if mouse is pressed go to menu
-            makeNewMap = false;
+        if (p5.mouseIsPressed) {
 
-            if (singlePlayer === true) {
-                createNewSinglePlayerObject();
-            } else {
-                createNewMultiplayerObject();
+            if(sessionGameState.currentState === GameStateEnum.NewMapSinglePlayer){
+                updateCurrentGameState(GameStateEnum.SinglePlayer);
             }
-            mouseIsPressed = false;
+            else if(sessionGameState.currentState === GameStateEnum.NewMapMultiPlayerOffline){
+                updateCurrentGameState(GameStateEnum.MultiPlayerOffline);
+            }
+            p5.mouseIsPressed = false;
         }
     }
 
     if (newMapButton.insideButton()) {
         //check to see if the mouse is pressed
-        if (!mouseIsPressed) {
+        if (!p5.mouseIsPressed) {
             //if mouse is not pressed then light up button
             newMapButton.lightUpButton();
         }
-        if (mouseIsPressed) {
+        if (p5.mouseIsPressed) {
             //if mouse is pressed go to menu
-            for (var i = 0; i < 10; i++) {
-                for (var j = 0; j < 10; j++) {
+            for (let i = 0; i < 10; i++) {
+                for (let j = 0; j < 10; j++) {
                     randomMap[i][j] = 0;
                 }
             }
             generateIslands(islandsCount);
-            mouseIsPressed = false;
+            p5.mouseIsPressed = false;
         }
     }
     // back button  - common for both the players
     if (backButton.insideButton()) {
         //check to see if the mouse is pressed
-        if (!mouseIsPressed) {
+        if (!p5.mouseIsPressed) {
             //if mouse is not pressed then light up button
             backButton.lightUpButton();
         }
-        if (mouseIsPressed) {
-            //if mouse is pressed go to menu
-            makeNewMap = false;
-            singlePlayer = false;
-            multiPlayerOffline = false;
-            menu = true;
-            mouseIsPressed = false;
+        if (p5.mouseIsPressed) {
+            updateCurrentGameState(GameStateEnum.Menu);
+            p5.mouseIsPressed = false;
         }
     }
 };
+export default newMapState;

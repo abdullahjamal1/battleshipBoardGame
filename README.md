@@ -5,17 +5,28 @@
 [<img src="https://storage.googleapis.com/web-dev-uploads/image/WlD8wC6g8khYWPJUsQceQkhXSlv1/UV4C4ybeBTsZt43U4xis.png">](https://chromewebstore.google.com/detail/battleship/ebkjodkggmaecphknjfepmdibcaddjbh?utm_source=github)
 
 ### [Snapshots](snapShots/)
-![battleship game](https://github.com/abdullahjamal1/battleshipBoardGame/blob/master/snapShots/battleship-all.png)
+![battleship game](/snapShots/v2/Screenshot%202024-02-12%20at%209.05.04 AM.png)
+![battleship game](/snapShots/v2/Screenshot%202024-02-12%20at%209.06.00 AM.png)
+![battleship game](/snapShots/v2/Screenshot%202024-02-12%20at%209.06.18 AM.png)
+![battleship game](/snapShots/v2/Screenshot%202024-02-12%20at%209.08.40 AM.png)
 
-An offline battleship board web game in which two players arrange five ships on their maps and then do guess-fire on each other's map in alternate turns until either player wins by sinking all the ships. 
+Classic Battleship board game with special island edition and tough AI for your browser.
 
-Whats different from other battleship board games ?
+Engage in strategic warfare as two players arrange their fleets of five ships on custom maps. Take turns guessing and firing upon each other's hidden ships until one emerges victorious by sinking all enemy vessels !
 
-* Supports creating island blocks where ships cannot be placed making the game interesting. 
-* A tough to defeat bot, which uses probability density map to reduce number of average turns required to win to 17 ! 
-* Turn on density lens to find how bot plays better under hoods.
+What sets our game apart ?
 
-Technologies used :- HTML, CSS, JavaScript (p5.js)
+- Island Blocks: Place island blocks strategically to challenge your opponents and add an extra layer of excitement.
+
+- Tough AI: Uses probability density map to reduce average turns to win to 17. Turn on density filter to learn with AI.
+
+- Light weight: Built with p5.js, game is very minimal in size.
+
+- Light/Dark theme support
+
+Set sail for victory and download "Battleship Game - Island Edition" today. Command your fleet, rule the waves and emerge as the ultimate naval commander!
+
+Technologies used :- HTML, CSS, Typescript, p5.js
 _________________________________________________________________________________________________________
  # Features
  * graphical and interactive GUI
@@ -26,17 +37,4 @@ ________________________________________________________________________________
  * supports game statistics
  * AI uses probability-density model to guess shot
  * supports density filter option to reveal how the AI works internally
- ________________________________________________________________________________________________________
- ## Task List
- 
- - [x] implement single-player
- - [x] implement offline-multiplayer
- - [x] implement game-statistics
- - [x] add random-island generation
- - [x] save game statistics in localStorage
- - [x] add PWA support [article followed for PWA support](https://cloudbytes.dev/snippets/convert-a-pelican-website-to-pwa-using-workbox)
- - [x] deploy PWA to play store [article for converting PWA to android app](https://developers.google.com/codelabs/pwa-in-play#0)
- - [x] add support for chrome extension [article for adding support](https://dev.to/chromiumdev/shipping-pwas-as-chrome-extensions-3l5c)
- - [ ] add audio in game
- ________________________________________________________________________________________________________
- 
+ ____________________________________________________________________________________________________
