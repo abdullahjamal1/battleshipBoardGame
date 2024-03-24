@@ -1,7 +1,7 @@
 import Button from "../classes/Button";
 import { ISLAND, RGB_THEME } from "../constants/constants";
 import {p5} from '../index'
-import { GameStateEnum, randomMap, sessionGameState, updateCurrentGameState } from "../setup/sketch";
+import { GameStateEnum, randomMap, persistentGameState, updateCurrentGameState } from "../setup/sketch";
 
 function generateIslands(islandsCount: number) {
     let stack: any = { first: [], second: [] };
@@ -152,10 +152,10 @@ function newMapState() {
         }
         if (p5.mouseIsPressed) {
 
-            if(sessionGameState.currentState === GameStateEnum.NewMapSinglePlayer){
+            if(persistentGameState.currentState === GameStateEnum.NewMapSinglePlayer){
                 updateCurrentGameState(GameStateEnum.SinglePlayer);
             }
-            else if(sessionGameState.currentState === GameStateEnum.NewMapMultiPlayerOffline){
+            else if(persistentGameState.currentState === GameStateEnum.NewMapMultiPlayerOffline){
                 updateCurrentGameState(GameStateEnum.MultiPlayerOffline);
             }
             p5.mouseIsPressed = false;

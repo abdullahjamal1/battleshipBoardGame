@@ -1,7 +1,7 @@
 import Button from '../classes/Button';
 import {p5} from '../index'
 import { setItem, STORAGE_KEYS } from '../service/storage';
-import { GameStateEnum, initPlayers, players, sessionGameState, statTable } from '../setup/sketch';
+import { GameStateEnum, initPlayers, players, persistentGameState, statTable } from '../setup/sketch';
 
 const statisticsEnum = {
     row: {
@@ -25,7 +25,7 @@ function roundTo(num: number) {
 
 async function updateStatTable(statTable: any){
     await setItem(STORAGE_KEYS.STATS, statTable);
-    sessionGameState.statTableUpdated = true;
+    persistentGameState.statTableUpdated = true;
 }
 
 let winStateCall = function () {
@@ -39,11 +39,11 @@ let winStateCall = function () {
         p5.text("Player 1 Wins !!! Turns: " + players.player1.turn, 400, 470, 400, 400);
 
 
-        if (sessionGameState.singlePlayerWin === true) {
+        if (persistentGameState.singlePlayerWin === true) {
 
             players.bot.drawGridActual();
 
-            if (!sessionGameState.statTableUpdated) {
+            if (!persistentGameState.statTableUpdated) {
                 // average turns to win
                 statTable[statisticsEnum.row.Player1][statisticsEnum.col.avgTurnsToWin] = roundTo((statTable[statisticsEnum.row.Player1][statisticsEnum.col.avgTurnsToWin] * statTable[statisticsEnum.row.Player1][statisticsEnum.col.matchesWon] + players.player1.turn) / (statTable[statisticsEnum.row.Player1][statisticsEnum.col.matchesWon] + 1));
 
@@ -77,7 +77,7 @@ let winStateCall = function () {
 
             players.player2.drawGridActual();
 
-            if (!sessionGameState.statTableUpdated) {
+            if (!persistentGameState.statTableUpdated) {
 
                 // average turns to win
                 statTable[statisticsEnum.row.Player1][statisticsEnum.col.avgTurnsToWin] = roundTo((statTable[statisticsEnum.row.Player1][statisticsEnum.col.avgTurnsToWin] * statTable[statisticsEnum.row.Player1][statisticsEnum.col.matchesWon] + players.player1.turn) / (statTable[statisticsEnum.row.Player1][statisticsEnum.col.matchesWon] + 1));
@@ -116,7 +116,7 @@ let winStateCall = function () {
         p5.textSize(40);
         p5.text("Player 2 Wins !!! Turns : " + players.player2.turn, 500, 470, 400, 400);
 
-        if (!sessionGameState.statTableUpdated) {
+        if (!persistentGameState.statTableUpdated) {
 
             // average turns to win
             statTable[statisticsEnum.row.Player2][statisticsEnum.col.avgTurnsToWin] = roundTo((statTable[statisticsEnum.row.Player2][statisticsEnum.col.avgTurnsToWin] * statTable[statisticsEnum.row.Player2][statisticsEnum.col.matchesWon] + players.player2.turn) / (statTable[statisticsEnum.row.Player2][statisticsEnum.col.matchesWon] + 1) );
@@ -157,7 +157,7 @@ let winStateCall = function () {
         p5.textSize(40);
         p5.text("BOT Wins !!! turns: " + players.bot.turn, 500, 460, 400, 400);
 
-        if (sessionGameState.statTableUpdated === false) {
+        if (persistentGameState.statTableUpdated === false) {
 
             // average turns to win
             statTable[statisticsEnum.row.botPlayer][statisticsEnum.col.avgTurnsToWin] = roundTo((statTable[statisticsEnum.row.botPlayer][statisticsEnum.col.avgTurnsToWin] * statTable[statisticsEnum.row.botPlayer][statisticsEnum.col.matchesWon] + players.bot.turn )/( statTable[statisticsEnum.row.botPlayer][statisticsEnum.col.matchesWon] + 1 ));
@@ -198,10 +198,10 @@ let winStateCall = function () {
         }
         if (p5.mouseIsPressed) {
 
-            sessionGameState.currentState = GameStateEnum.Menu;
+            persistentGameState.currentState = GameStateEnum.Menu;
 
-            sessionGameState.statTableUpdated = false;
-            sessionGameState.singlePlayerWin = false;
+            persistentGameState.statTableUpdated = false;
+            persistentGameState.singlePlayerWin = false;
             initPlayers();
         }
     }

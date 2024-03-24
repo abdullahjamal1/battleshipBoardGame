@@ -18,6 +18,8 @@ function unsetMouseIsPressed() {
 
 const sketch = (p: P5) => {
   p.setup = () => {
+    // to make it responsive
+    // p.createCanvas(p5.windowWidth, p5.windowHeight)
     p.createCanvas(750, 375);
     p.frameRate(60);
   };

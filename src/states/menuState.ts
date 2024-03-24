@@ -1,6 +1,6 @@
 import button from "../classes/Button";
 import {p5} from '../index'
-import { initializeRandomMap, sessionGameState, GameStateEnum, updateCurrentGameState } from "../setup/sketch";
+import { initializeRandomMap, persistentGameState, GameStateEnum, updateCurrentGameState } from "../setup/sketch";
 
 let posX = 400,
     posY = 120;

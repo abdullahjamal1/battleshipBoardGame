@@ -1,5 +1,5 @@
 import Player from "./Player";
-import { persistentGameState, alerts } from "../setup/sketch";
+import { alerts, persistentGameState, saveBotState } from "../setup/sketch";
 import {p5} from '../index';
 import { ISLAND } from "../constants/constants";
 
@@ -31,7 +31,66 @@ class Bot extends Player {
         this.stack_x = [];
         this.stack_y = [];
     }
-
+    getBotFieldsToSave(){
+        return {
+            target_locked_x: this.target_locked_x,
+            target_locked_y: this.target_locked_y,
+            chainFire: this.chainFire,
+            curr_big_ship: this.curr_big_ship,
+            smallSize: this.smallSize,
+            grid: this.grid,
+            missed_target_x: this.missed_target_x,
+            missed_target_y: this.missed_target_y,
+            stack_x: this.stack_x,
+            stack_y: this.stack_y,
+            hitShipType: this.hitShipType,
+            gridHidden: this.gridHidden,
+            gridActual: this.gridActual,
+            currLife: this.currLife,
+            name: this.name,
+            playerIs: this.playerIs,
+            turn: this.turn,
+            shipArranged: this.shipArranged,
+            autoButtonPushed: this.autoButtonPushed,
+            confirmButtonPushed: this.confirmButtonPushed,
+            playeris: this.playeris,
+            sendHtppRequest: this.sendHtppRequest,
+            startOnlineGame: this.startOnlineGame,
+            hitX: this.hitX,
+            hitY: this.hitY,
+            shipDetails: this.shipDetails,
+            win: this.win
+        }
+    }
+    setFieldsToLoad(data: any){
+        this.target_locked_x = data.target_locked_x;
+        this.target_locked_y = data.target_locked_y;
+        this.chainFire = data.chainFire;
+        this.curr_big_ship = data.curr_big_ship;
+        this.smallSize = data.smallSize;
+        this.grid = data.grid;
+        this.missed_target_x = data.missed_target_x;
+        this.missed_target_y = data.missed_target_y;
+        this.stack_x = data.stack_x;
+        this.stack_y = data.stack_y;
+        this.hitShipType = data.hitShipType;
+        this.gridHidden = data.gridHidden;
+        this.gridActual = data.gridActual;
+        this.currLife = data.currLife;
+        this.name = data.name;
+        this.playerIs = data.playerIs;
+        this.turn = data.turn;
+        this.shipArranged = data.shipArranged;
+        this.autoButtonPushed = data.autoButtonPushed;
+        this.confirmButtonPushed = data.confirmButtonPushed;
+        this.playeris = data.playeris;
+        this.sendHtppRequest = data.sendHtppRequest;
+        this.startOnlineGame = data.startOnlineGame;
+        this.hitX = data.hitX;
+        this.hitY = data.hitY;
+        this.shipDetails = data.shipDetails;
+        this.win = data.win;
+    }
     drawProbabilityDensityGrid() {
         let i = 1;
         let j = 1;
@@ -296,9 +355,6 @@ class Bot extends Player {
         return max;
     };
     play() {
-        let botHitX = 0,
-            botHitY = 0;
-    
         if (this.checkShipLifeStatus()) {
             return true;
         }
@@ -343,8 +399,8 @@ class Bot extends Player {
     
         let randomNumber = Math.floor(p5.random(0, this.stack_x.length));
     
-        botHitX = this.stack_x[randomNumber];
-        botHitY = this.stack_y[randomNumber];
+        const botHitX = this.stack_x[randomNumber];
+        const botHitY = this.stack_y[randomNumber];
     
         while (this.stack_x.length > 0) {
             this.stack_x.pop();
@@ -358,7 +414,9 @@ class Bot extends Player {
         ) {
             this.gridHidden[botHitX][botHitY] = -1;
             alerts.playerSwitching.active = true;
+            persistentGameState.playerOneTurn = !persistentGameState.playerOneTurn;
             this.turn++;
+            saveBotState();
         }
     
         // if shot hit execute this
@@ -411,6 +469,7 @@ class Bot extends Player {
                 this.target_locked_y.push(botHitY);
                 this.chainFire = true;
             }
+            saveBotState();
         }
         return 0;
     };

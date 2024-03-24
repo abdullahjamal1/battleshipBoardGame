@@ -1,7 +1,7 @@
 import Button from '../classes/Button';
 import { RGB_THEME } from '../constants/constants';
 import {p5, unsetMouseIsPressed} from '../index';
-import { GameStateEnum, sessionGameState, statTable } from '../setup/sketch';
+import { GameStateEnum, persistentGameState, statTable } from '../setup/sketch';
 
 const statisticsState = function () {
   // background(0, 255, 255,100);
@@ -156,7 +156,7 @@ const statisticsState = function () {
       backButton.lightUpButton();
     }
     if (p5.mouseIsPressed) {
-      sessionGameState.currentState = GameStateEnum.Menu;
+      persistentGameState.currentState = GameStateEnum.Menu;
     }
   }
 };

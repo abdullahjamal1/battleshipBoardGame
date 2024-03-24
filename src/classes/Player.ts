@@ -1,6 +1,6 @@
 import {p5, unsetMouseIsPressed} from '../index';
 import { GLOBAL_SCALE, RGB_THEME, ISLAND } from '../constants/constants';
-import { alerts, randomMap, sessionGameState } from '../setup/sketch';
+import { alerts, randomMap, savePlayer1State, savePlayer2State, persistentGameState } from '../setup/sketch';
 
 class Player{
     gridHidden: any[][];
@@ -49,6 +49,44 @@ class Player{
             { color: { r: 255, g: 127, b: 80 }, size: 4, id: 4, name: "battleship", begin: { x: 0, y: 0 }, end: { x: 0, y: 0 }},
             { color: { r: 238, g: 220, b: 130 }, size: 5, id: 5, name: "aircraftCarrier", begin: { x: 0, y: 0 }, end: { x: 0, y: 0 }},
         ];
+    }
+    getFieldsToSave(){
+        return {
+            gridHidden: this.gridHidden,
+            gridActual: this.gridActual,
+            currLife: this.currLife,
+            name: this.name,
+            playerIs: this.playerIs,
+            turn: this.turn,
+            shipArranged: this.shipArranged,
+            autoButtonPushed: this.autoButtonPushed,
+            confirmButtonPushed: this.confirmButtonPushed,
+            playeris: this.playeris,
+            sendHtppRequest: this.sendHtppRequest,
+            startOnlineGame: this.startOnlineGame,
+            hitX: this.hitX,
+            hitY: this.hitY,
+            shipDetails: this.shipDetails,
+            win: this.win
+        }
+    }
+    setFieldsToLoad(data: any){
+        this.gridHidden = data.gridHidden;
+        this.gridActual = data.gridActual;
+        this.currLife = data.currLife;
+        this.name = data.name;
+        this.playerIs = data.playerIs;
+        this.turn = data.turn;
+        this.shipArranged = data.shipArranged;
+        this.autoButtonPushed = data.autoButtonPushed;
+        this.confirmButtonPushed = data.confirmButtonPushed;
+        this.playeris = data.playeris;
+        this.sendHtppRequest = data.sendHtppRequest;
+        this.startOnlineGame = data.startOnlineGame;
+        this.hitX = data.hitX;
+        this.hitY = data.hitY;
+        this.shipDetails = data.shipDetails;
+        this.win = data.win;
     }
     countShipStatus(shipStatus: string) {
         let numberOfShipsDestroyed = 0;
@@ -140,8 +178,8 @@ class Player{
                     if (
                         alerts.shipSunk.shipId === this.shipDetails[i].id &&
                         alerts.shipSunk.active === true &&
-                        ((this.playerIs === 1 && sessionGameState.playerOneTurn === false) ||
-                            (this.playerIs === 2 && sessionGameState.playerOneTurn == true)) &&
+                        ((this.playerIs === 1 && persistentGameState.playerOneTurn === false) ||
+                            (this.playerIs === 2 && persistentGameState.playerOneTurn == true)) &&
                         Math.floor(alerts.shipSunk.iterator / 10) % 2 === 0
                     ) {
                         p5.fill(
@@ -176,7 +214,7 @@ class Player{
                 // block not yet hit
                 //   if(this.gridHidden[i-1][j-1] === 0){
                 p5.fill(RGB_THEME.BOARD_OCEAN_BLOCK);
-                if (sessionGameState.isDensityLensEnabled === false || this.playeris !== 2) {
+                if (persistentGameState.isDensityLensEnabled === false || this.playeris !== 2) {
                     if (this.gridHidden[i - 1][j - 1] === ISLAND) {
                         //sandy beach colour
                         p5.fill(RGB_THEME.BOARD_ISLAND_BLOCK);
@@ -381,10 +419,17 @@ class Player{
                                 // send player2.hitX and player2.hitY
     
                                 alerts.playerSwitching.active = true;
-    
+                                persistentGameState.playerOneTurn = !persistentGameState.playerOneTurn;
+
+                                if (playerIs === 2) {
+                                    savePlayer2State();
+                                } else {
+                                    savePlayer1State();
+                                }
                                 if (this.checkShipLifeStatus() === true) {
                                     return true;
                                 }
+                                
     
                                 // returns when shot misses
                                 return 0;
@@ -408,9 +453,11 @@ class Player{
                                 //send your hit coordinates info to the server
                                 // send player2.hitX and player2.hitY
                                 if (playerIs === 2) {
-                                    sessionGameState.playerOneTurn = true;
+                                    persistentGameState.playerOneTurn = true;
+                                    savePlayer2State();
                                 } else {
-                                    sessionGameState.playerOneTurn = false;
+                                    persistentGameState.playerOneTurn = false;
+                                    savePlayer1State();
                                 }
                                 return 0;
                             }
@@ -425,7 +472,7 @@ class Player{
         }
         return 0;
     };
-    DeployShipsReceivedFromServer() {
+    deployShipsReceivedFromServer() {
         let i = 0,
             j = 0;
     
