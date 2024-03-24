@@ -2,9 +2,8 @@ import { p5 } from "..";
 import Button from "../classes/Button";
 import { animation } from "../draw";
 import mapSwap from "../mapSwap";
-import { GameStateEnum, alerts, initPlayers, players, sessionGameState, updateCurrentGameState } from "../setup/sketch";
+import { GameStateEnum, alerts, initPlayers, players, persistentGameState, updateCurrentGameState } from "../setup/sketch";
 
-//play
 let player1AutoButton = new Button("Auto", 80, 490);
 let player1ConfirmButton = new Button("Confirm", 280, 490);
 let player2ConfirmButton = new Button("Confirm", 930, 490);
@@ -137,37 +136,30 @@ const multiPlayerOfflineState = function () {
             alerts.playerSwitching.iterator++;
 
             if (alerts.playerSwitching.iterator <= 50) {
-                if (sessionGameState.playerOneTurn) {
-                    animation.showMessage("PLAYER 1 TURN");
-                } else {
+                if (persistentGameState.playerOneTurn) {
                     animation.showMessage("PLAYER 2 TURN");
+                } else {
+                    animation.showMessage("PLAYER 1 TURN");
                 }
             }
             if (alerts.playerSwitching.iterator > 60) {
                 alerts.playerSwitching.iterator = 0;
-
                 alerts.playerSwitching.active = false;
-
-                if (sessionGameState.playerOneTurn === true) {
-                    sessionGameState.playerOneTurn = false;
-                } else {
-                    sessionGameState.playerOneTurn = true;
-                }
             }
-        } else if (sessionGameState.playerOneTurn) {
+        } else if (persistentGameState.playerOneTurn) {
             if (players.player2.play(2) === true) {
                 // make separate class for win
                 // multiPlayerOffline = false;
-                updateCurrentGameState(GameStateEnum.WinState);
                 players.player2.win = true;
-                sessionGameState.singlePlayerWin = false;
+                persistentGameState.singlePlayerWin = false;
+                updateCurrentGameState(GameStateEnum.WinState);
             }
         } else {
             if (players.player1.play(1) === true) {
                 // multiPlayerOffline = false;
-                updateCurrentGameState(GameStateEnum.WinState);
                 players.player1.win = true;
-                sessionGameState.singlePlayerWin = false;
+                persistentGameState.singlePlayerWin = false;
+                updateCurrentGameState(GameStateEnum.WinState);
             }
         }
     }
@@ -182,10 +174,8 @@ const multiPlayerOfflineState = function () {
         if (p5.mouseIsPressed) {
             //if mouse is pressed go to menu
             // multiPlayerOffline = false;
-            updateCurrentGameState(GameStateEnum.Menu);
             initPlayers();
-            players.player1.initializeGrid();
-            players.player2.initializeGrid();
+            updateCurrentGameState(GameStateEnum.Menu);
             p5.mouseIsPressed = false;
             //p5.mouseIsPressed = false;
         }

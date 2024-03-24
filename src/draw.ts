@@ -9,12 +9,12 @@ import instructionsState from "./states/instructionsState";
 import statisticsState from "./states/statisticsState";
 import button from "./classes/Button";
 import Animation from "./classes/BackgroundAnimation";
-import { sessionGameState, GameStateEnum, persistentGameState } from "./setup/sketch";
+import { persistentGameState, GameStateEnum, saveGameState } from "./setup/sketch";
 
 let posX = 400,
     posY = 120;
 let menuButtonWidth = 180;
-let themeSwitchButton = new button("Light", posX + 550, 10, menuButtonWidth);
+let themeSwitchButton = new button(persistentGameState.isLightTheme ?  "Light" : "Dark", posX + 550, 10, menuButtonWidth);
 
 let animation = new Animation();
 /**
@@ -27,9 +27,10 @@ const draw = function () {
     themeSwitchButton.draw();
     themeSwitchButton.onClick(()=>{
         persistentGameState.isLightTheme = !persistentGameState.isLightTheme;
-        themeSwitchButton.txt = themeSwitchButton.txt === "Light" ? "Dark" : "Light";
+        themeSwitchButton.txt = (persistentGameState.isLightTheme ? "Light" : "Dark");
+        saveGameState();
     });
-    switch (sessionGameState.currentState) {
+    switch (persistentGameState.currentState) {
         case GameStateEnum.Menu: menuState(); break;
         case GameStateEnum.NewMapSinglePlayer:
         case GameStateEnum.NewMapMultiPlayerOffline: newMapState(); break;

@@ -1,4 +1,4 @@
-import {STORAGE_KEYS, getItem, setItem} from '../service/storage';
+import {STORAGE_KEYS, getItem, getLocalItem, setItem, setLocalItem} from '../service/storage';
 import Player from '../classes/Player';
 import Bot from '../classes/Bot';
 /**
@@ -19,25 +19,73 @@ enum GameStateEnum {
   NewMapMultiPlayerOffline = 'newMapMultiPlayerOffline'
 }
 
-const sessionGameState = {
+let persistentGameState = {
   currentState: GameStateEnum.Menu,
   isDensityLensEnabled: false,
   playerOneTurn: true,
   singlePlayerWin: false,
   multiPlayerWin: false,
   statTableUpdated: false,
+  isLightTheme: true
 };
 
 function getCurrentGameState(){
-  return sessionGameState.currentState;
+  return persistentGameState.currentState;
+}
+
+function saveGameState(){
+  setLocalItem(STORAGE_KEYS.GAME_STATE, persistentGameState);
+  setLocalItem(STORAGE_KEYS.PLAYER1_STATE, players.player1.getFieldsToSave());
+  setLocalItem(STORAGE_KEYS.PLAYER2_STATE, players.player2.getFieldsToSave());
+  setLocalItem(STORAGE_KEYS.BOT_STATE, players.bot.getBotFieldsToSave());
+}
+function saveBotState(){
+  setLocalItem(STORAGE_KEYS.GAME_STATE, persistentGameState);
+  setLocalItem(STORAGE_KEYS.BOT_STATE, players.bot.getBotFieldsToSave());
+}
+function savePlayer1State(){
+  setLocalItem(STORAGE_KEYS.GAME_STATE, persistentGameState);
+  setLocalItem(STORAGE_KEYS.PLAYER1_STATE, players.player1.getFieldsToSave());
+}
+function savePlayer2State(){
+  setLocalItem(STORAGE_KEYS.GAME_STATE, persistentGameState);
+  setLocalItem(STORAGE_KEYS.PLAYER2_STATE, players.player2.getFieldsToSave());
 }
 
 function updateCurrentGameState(gameState: GameStateEnum) {
-  sessionGameState.currentState = gameState;
+  persistentGameState.currentState = gameState;
+  saveGameState();
 }
 
-let persistentGameState = {
-  isLightTheme: true
+function loadGameState() {
+  try {
+    let cachedpersistentGameState = getLocalItem(STORAGE_KEYS.GAME_STATE);
+    if (cachedpersistentGameState !== null) {
+      console.log(`existing persistentGameState exist ${cachedpersistentGameState}`)
+      persistentGameState = cachedpersistentGameState;
+    }
+    // load player1
+    let cachedPlayer1 = getLocalItem(STORAGE_KEYS.PLAYER1_STATE);
+    if (cachedPlayer1 !== null) {
+      console.log(`existing player1 exist ${cachedPlayer1}`)
+      players.player1.setFieldsToLoad(cachedPlayer1);
+    }
+    // load player2
+    let cachedPlayer2 = getLocalItem(STORAGE_KEYS.PLAYER2_STATE);
+    if (cachedPlayer2 !== null) {
+      console.log(`existing player2 exist ${cachedPlayer2}`)
+      players.player2.setFieldsToLoad(cachedPlayer2);
+    }
+    // load bot
+    let cachedBot = getLocalItem(STORAGE_KEYS.BOT_STATE);
+    if (cachedBot !== null) {
+      console.log(`existing bot exist ${cachedBot}`)
+      players.bot.setFieldsToLoad(cachedBot);
+    }
+    console.log("game states loaded successfully")
+  } catch (error) {
+    console.error(`error occurred while reading from storage ${error}`)
+  }
 }
 
 let alerts = {
@@ -136,14 +184,18 @@ let createNewSinglePlayerObject = function () {
   players.player1.initializeGrid();
 
   // destructor equivalent for previous...
-  sessionGameState.isDensityLensEnabled = false;
+  persistentGameState.isDensityLensEnabled = false;
   players.bot = new Bot();
   players.bot.initializeGrid();
 };
 
 function initPlayers() {
+  initializeRandomMap();
   createNewSinglePlayerObject();
   createNewMultiplayerObject();
+  saveGameState();
 }
 
-export {sessionGameState, GameStateEnum, persistentGameState, alerts, initializeRandomMap, updateCurrentGameState, getCurrentGameState, randomMap, statTable, players, initPlayers};
+loadGameState();
+
+export {persistentGameState, GameStateEnum, alerts, initializeRandomMap, updateCurrentGameState, getCurrentGameState, randomMap, statTable, players, initPlayers, saveGameState, saveBotState, savePlayer1State, savePlayer2State};

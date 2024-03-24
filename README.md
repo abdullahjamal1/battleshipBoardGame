@@ -27,6 +27,61 @@ What sets our game apart ?
 Set sail for victory and download "Battleship Game - Island Edition" today. Command your fleet, rule the waves and emerge as the ultimate naval commander!
 
 Technologies used :- HTML, CSS, Typescript, p5.js
+
+_________________________________________________________________________________________________________
+# Installation Guide
+
+## Option 1: Using the Plugin from the extensions store
+
+1. Visit the [Battleship game extension on the Chrome Web Store](https://chromewebstore.google.com/detail/battleship/ebkjodkggmaecphknjfepmdibcaddjbh?utm_source=github)
+
+2. Follow the installation instructions on the page.
+
+## Option 2: Compiling it On Your Own
+
+If you want to compile the extension on your own, follow these steps:
+
+### Step 1: Clone the Repository
+
+Clone the battleshipBoardGame repository to your local machine:
+
+#### Chromium
+```bash
+git clone https://github.com/abdullahjamal1/battleshipBoardGame.git
+```
+
+### Step 2: Install Dependencies
+
+Navigate to the project directory and install the necessary dependencies:
+
+```bash
+npm install
+```
+
+### Step 3: Code Your Magic
+
+Make the necessary modifications or enhancements to the code.
+
+### Step 4: Build the Extension
+
+- Build the extension by running:
+  ```bash
+  npm run build
+  ```
+
+### Step 5: Generate a Release (Optional)
+
+Generate a release zip file to be uploaded to the browser/store:
+
+```bash
+npm run release
+```
+
+### Load the extension in Chromium browsers
+  - Go to `chrome://extensions/`.
+  - Enable "Developer mode".
+  - Click "Load unpacked" and select the project folder.
+
 _________________________________________________________________________________________________________
  # Features
  * graphical and interactive GUI

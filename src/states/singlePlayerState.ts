@@ -2,7 +2,7 @@ import { p5 } from "..";
 import Button from "../classes/Button";
 import { animation } from "../draw";
 import mapSwap from "../mapSwap";
-import { GameStateEnum, alerts, initPlayers, players, sessionGameState, updateCurrentGameState } from "../setup/sketch";
+import { GameStateEnum, alerts, initPlayers, players, saveGameState, persistentGameState, updateCurrentGameState } from "../setup/sketch";
 
 // background(0, 255, 255,100);
 let backButton1 = new Button("Exit", 10, 10);
@@ -14,7 +14,6 @@ let player1ConfirmButton = new Button("Confirm", 280, 490);
 let singlePlayerState = function () {
 
   backButton1.draw();
-
   //densityLens = false;
 
   // draws 10*10 grid for player 1
@@ -31,7 +30,7 @@ let singlePlayerState = function () {
       }
       if (p5.mouseIsPressed) {
        
-        sessionGameState.isDensityLensEnabled = !sessionGameState.isDensityLensEnabled;
+        persistentGameState.isDensityLensEnabled = !persistentGameState.isDensityLensEnabled;
         p5.mouseIsPressed = false;
       }
     }
@@ -55,6 +54,7 @@ let singlePlayerState = function () {
         players.player1.arrangeShip();
         players.player1.autoButtonPushed = true;
         p5.mouseIsPressed = false;
+        saveGameState();
         //shipArranged = true;
       }
     }
@@ -81,6 +81,7 @@ let singlePlayerState = function () {
         mapSwap("singlePlayer");
         p5.mouseIsPressed = false;
         //shipArranged = true;
+        saveGameState();
       }
     }
   }
@@ -89,23 +90,23 @@ let singlePlayerState = function () {
   // main multiplayer pass N play if statement
   if (players.player1.confirmButtonPushed) {
     if (alerts.shipSunk.active || alerts.shipHit.active || alerts.playerSwitching.active) {
-    }else if (sessionGameState.playerOneTurn) {
+    }else if (persistentGameState.playerOneTurn) {
       // argument 3 represents bot
       //  players.bot.play();
       if (players.bot.play() === true) {
-        updateCurrentGameState(GameStateEnum.WinState);
         players.bot.win = true;
-        sessionGameState.singlePlayerWin = true;
+        persistentGameState.singlePlayerWin = true;
+        updateCurrentGameState(GameStateEnum.WinState);
       }
     } else {
       //  players.player1.play(1);
       if (players.player1.play(1) === true) {
-        updateCurrentGameState(GameStateEnum.WinState);
         players.player1.win = true;
-        sessionGameState.singlePlayerWin = true;
+        persistentGameState.singlePlayerWin = true;
+        updateCurrentGameState(GameStateEnum.WinState);
       }
     }
-    if (sessionGameState.isDensityLensEnabled === true) {
+    if (persistentGameState.isDensityLensEnabled === true) {
       players.bot.calcProbabilityDensity();
       players.bot.drawProbabilityDensityGrid();
     }
@@ -129,21 +130,17 @@ let singlePlayerState = function () {
       // delay loop
       alerts.playerSwitching.iterator++;
       if (alerts.playerSwitching.iterator <= 50) {
-        if (sessionGameState.playerOneTurn) {
-          animation.showMessage("PLAYER 1 TURN");
-        } else {
+        if (persistentGameState.playerOneTurn) {
           animation.showMessage(" BOT TURN");
+        } else {
+          animation.showMessage("PLAYER 1 TURN");
         }
       } else if (alerts.playerSwitching.iterator > 60) {
+
         alerts.playerSwitching.iterator = 0;
-
         alerts.playerSwitching.active = false;
-
-        if (sessionGameState.playerOneTurn === true) {
-          sessionGameState.playerOneTurn = false;
-        } else {
-          sessionGameState.playerOneTurn = true;
-        }
+        // persistentGameState.playerOneTurn = !persistentGameState.playerOneTurn;
+        // saveGameState();
       }
     } 
   }
@@ -156,12 +153,9 @@ let singlePlayerState = function () {
       backButton1.lightUpButton();
     }
     if (p5.mouseIsPressed) {
+      initPlayers();
       //if mouse is pressed go to menu
       updateCurrentGameState(GameStateEnum.Menu);
-      initPlayers();
-      players.player1.initializeGrid();
-      players.bot.initializeGrid();
-
       p5.mouseIsPressed = false;
     }
   }

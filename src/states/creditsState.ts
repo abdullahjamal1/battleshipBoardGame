@@ -1,6 +1,6 @@
 import Button from '../classes/Button';
 import {p5, unsetMouseIsPressed} from '../index';
-import { GameStateEnum, sessionGameState } from '../setup/sketch';
+import { GameStateEnum, persistentGameState } from '../setup/sketch';
 
 let backButton = new Button("back", 150, 300);
 
@@ -16,7 +16,7 @@ const creditsState = function () {
     if (backButton.insideButton()) {
         backButton.lightUpButton();
         if (backButton.isPressed()) {
-            sessionGameState.currentState = GameStateEnum.Menu;
+            persistentGameState.currentState = GameStateEnum.Menu;
         }
     }
 };
