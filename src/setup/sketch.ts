@@ -197,5 +197,7 @@ function initPlayers() {
 }
 
 loadGameState();
+// persistentGameState.isDensityLensEnabled = true;
+
 
 export {persistentGameState, GameStateEnum, alerts, initializeRandomMap, updateCurrentGameState, getCurrentGameState, randomMap, statTable, players, initPlayers, saveGameState, saveBotState, savePlayer1State, savePlayer2State};

@@ -12,8 +12,8 @@ class Bot extends Player {
     target_locked_y: any[];
     missed_target_x: any[];
     missed_target_y: any[];
-    stack_x: any[];
-    stack_y: any[];
+    potential_targets_x: any[];
+    potential_targets_y: any[];
     hitShipType: number;
     constructor() {
         super("p2", 2);
@@ -28,8 +28,8 @@ class Bot extends Player {
         this.target_locked_y = [];
         this.missed_target_x = [];
         this.missed_target_y = [];
-        this.stack_x = [];
-        this.stack_y = [];
+        this.potential_targets_x = [];
+        this.potential_targets_y = [];
     }
     getBotFieldsToSave(){
         return {
@@ -41,8 +41,8 @@ class Bot extends Player {
             grid: this.grid,
             missed_target_x: this.missed_target_x,
             missed_target_y: this.missed_target_y,
-            stack_x: this.stack_x,
-            stack_y: this.stack_y,
+            potential_targets_x: this.potential_targets_x,
+            potential_targets_y: this.potential_targets_y,
             hitShipType: this.hitShipType,
             gridHidden: this.gridHidden,
             gridActual: this.gridActual,
@@ -71,8 +71,8 @@ class Bot extends Player {
         this.grid = data.grid;
         this.missed_target_x = data.missed_target_x;
         this.missed_target_y = data.missed_target_y;
-        this.stack_x = data.stack_x;
-        this.stack_y = data.stack_y;
+        this.potential_targets_x = data.potential_targets_x;
+        this.potential_targets_y = data.potential_targets_y;
         this.hitShipType = data.hitShipType;
         this.gridHidden = data.gridHidden;
         this.gridActual = data.gridActual;
@@ -266,11 +266,8 @@ class Bot extends Player {
                 }
             }
         }
-    
-        while (this.stack_x.length > 0) {
-            this.stack_x.pop();
-            this.stack_y.pop();
-        }
+        this.potential_targets_x = [];
+        this.potential_targets_y = [];
     };
     calcProbabilityDensity() {
         let i, j, k;
@@ -358,27 +355,34 @@ class Bot extends Player {
         if (this.checkShipLifeStatus()) {
             return true;
         }
-    
-        if (this.missed_target_x.length > 0 && !this.chainFire) {
-            this.chainFire = true;
-            let tempX = this.missed_target_x.pop();
-            let tempY = this.missed_target_y.pop();
-    
-            // give lock high probability
-            this.grid[tempX][tempY] = this.grid[tempX][tempY] + 20;
-            this.target_locked_x.push(tempX);
-            this.target_locked_y.push(tempY);
-            this.hitShipType = this.gridActual[tempX][tempY];
-        }
-    
+
+          
         this.calcProbabilityDensity();
     
+        // if (this.missed_target_x.length > 0 && !this.chainFire) {
+        //     this.chainFire = true;
+        //     let tempX = this.missed_target_x.pop();
+        //     let tempY = this.missed_target_y.pop();
+    
+        //     // give lock high probability
+        //     this.grid[tempX][tempY] = this.grid[tempX][tempY] + 20;
+        //     this.target_locked_x.push(tempX);
+        //     this.target_locked_y.push(tempY);
+        //     this.hitShipType = this.gridActual[tempX][tempY];
+        // }
+  
         let max = this.maxProbability();
     
-        while (this.stack_x.length > 0) {
-            this.stack_x.pop();
-            this.stack_y.pop();
+        while (this.potential_targets_x.length > 0) {
+            this.potential_targets_x.pop();
+            this.potential_targets_y.pop();
         }
+
+        console.log(this.grid);
+        console.log("potential targets", this.potential_targets_x, this.potential_targets_y);
+        console.log("targets locked", this.target_locked_x, this.target_locked_y);
+        console.log("missed_target", this.missed_target_x, this.missed_target_y);
+        console.log("gridActual", this.gridActual);
     
         for (let i = 0; i < 10; i++) {
             for (let j = 0; j < 10; j++) {
@@ -388,23 +392,23 @@ class Bot extends Player {
                         this.target_locked_x[0] === i ||
                         this.target_locked_y[0] === j
                     ) {
-                        this.stack_x.push(i);
-                        this.stack_y.push(j);
+                        this.potential_targets_x.push(i);
+                        this.potential_targets_y.push(j);
                     }
                 }
             }
         }
-    
+
         // selects target randomly from highest density block
     
-        let randomNumber = Math.floor(p5.random(0, this.stack_x.length));
+        let randomNumber = Math.floor(p5.random(0, this.potential_targets_x.length));
     
-        const botHitX = this.stack_x[randomNumber];
-        const botHitY = this.stack_y[randomNumber];
+        const botHitX = this.potential_targets_x[randomNumber];
+        const botHitY = this.potential_targets_y[randomNumber];
     
-        while (this.stack_x.length > 0) {
-            this.stack_x.pop();
-            this.stack_y.pop();
+        while (this.potential_targets_x.length > 0) {
+            this.potential_targets_x.pop();
+            this.potential_targets_y.pop();
         }
     
         // if shot missed execute this
@@ -451,14 +455,46 @@ class Bot extends Player {
     
                 // if ship sinked execute this else
                 else {
-                    while (this.target_locked_x.length > 0) {
-                        this.target_locked_x.pop();
-                        this.target_locked_y.pop();
+                    if(this.missed_target_x.length === 0){
+                        
+                        this.chainFire = false;
+                        // TODO: uncomment
+                        while (this.target_locked_x.length > 0) {
+                            this.target_locked_x.pop();
+                            this.target_locked_y.pop();
+                        }
+                        
+                        this.smallSize = 0;
+                        this.hitShipType = 0;
+                                                        
                     }
-    
-                    this.smallSize = 0;
-                    this.hitShipType = 0;
-                    this.chainFire = false;
+                    else{
+                        this.chainFire = true;
+
+                        for(let i = this.target_locked_x.length - 1; i >= 0; i--){
+                            if(this.gridActual[this.target_locked_x[i]][this.target_locked_y[i]] === this.hitShipType){
+                                let removedX = this.target_locked_x.splice(i, 1);
+                                let removedY = this.target_locked_y.splice(i, 1);
+                                console.log("removed", removedX, removedY , "on ship sink of ", this.hitShipType);
+                            }
+                        }
+
+                        let tempX = this.missed_target_x.pop();
+                        let tempY = this.missed_target_y.pop();
+                        this.hitShipType = this.gridActual[tempX][tempY];
+                        this.target_locked_x.push(tempX);
+                        this.target_locked_y.push(tempY);
+                        // push all shipTypes of a particular pop into target locked
+                        for(let i = this.missed_target_x.length - 1; i >= 0; i--){
+                            if(this.gridActual[this.missed_target_x[i]][this.missed_target_y[i]] === this.hitShipType){
+                                this.target_locked_x.push(this.missed_target_x[i]);
+                                this.target_locked_y.push(this.missed_target_y[i]);
+                                this.missed_target_x.splice(i, 1);
+                                this.missed_target_y.splice(i, 1);
+                            }
+                        }
+                    }
+
                 }
             }
     

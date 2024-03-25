@@ -1,6 +1,6 @@
 import {p5, unsetMouseIsPressed} from '../index';
 import { GLOBAL_SCALE, RGB_THEME, ISLAND } from '../constants/constants';
-import { alerts, randomMap, savePlayer1State, savePlayer2State, persistentGameState } from '../setup/sketch';
+import { alerts, randomMap, savePlayer1State, savePlayer2State, persistentGameState, GameStateEnum } from '../setup/sketch';
 
 class Player{
     gridHidden: any[][];
@@ -144,6 +144,24 @@ class Player{
                 }
             }
         }
+        // this.shipDetails.forEach((ship, index) => {
+        //     p5.fill(
+        //         ship.color.r,
+        //         ship.color.g,
+        //         ship.color.b,
+        //     );
+        //     if(ship.begin.x === ship.end.x){
+        //         console.log(ship.begin.x, ship.begin.y, ship.end.x, ship.end.y)
+        //         p5.rect(indent + 90 + 35 * ship.begin.x, indent_y + 90 + 35 * ship.begin.y, 25, (ship.size >= 3 ? 16.3 : 15) * (ship.end.y - ship.begin.y + ship.size), 15, 15, 15, 15);
+        //         // p5.ellipse(indent + 100 + 35 * ship.begin.x, indent_y + 120 + 35 * ship.begin.y, 35 * (ship.end.x - ship.begin.x), 35);
+        //     }
+        //     else{
+        //         console.log(ship.begin.x, ship.begin.y, ship.end.x, ship.end.y)
+        //         p5.rect(indent + 90 + 35 * ship.begin.x, indent_y + 90 + 35 * ship.begin.y, (ship.size >= 3 ? 16.3 : 15) * (ship.end.x - ship.begin.x + ship.size), 25, 15, 15, 15, 15);
+
+        //         // p5.ellipse(indent + 100 + 35 * ship.begin.x, indent_y + 120 + 35 * ship.begin.y, 35, 35 * (ship.end.y - ship.begin.y));
+        //     }
+        // })
     };
     drawGridHidden() {
         let i = 1,
@@ -229,10 +247,25 @@ class Player{
                 // missed inside block
                 else if (this.gridHidden[i - 1][j - 1] === -1) {
                     p5.fill(RGB_THEME.SHIP_MISS);
-                    p5.ellipse(indent + 67.5 + 35 * i, indent_y + 97.5 + 35 * j, 25, 25);
+                    p5.rect(indent + 50 + 35 * i, indent_y + 80 + 35 * j, 35, 35);
+                    // p5.ellipse(indent + 67.5 + 35 * i, indent_y + 97.5 + 35 * j, 25, 25);
+                }
+                else{
+                    if (this.gridActual[i - 1][j - 1] > 0
+                         && this.playerIs === 2
+                         && persistentGameState.currentState === GameStateEnum.SinglePlayer) {
+                        p5.fill(
+                            this.shipDetails[this.gridActual[i - 1][j - 1] - 1].color.r,
+                            this.shipDetails[this.gridActual[i - 1][j - 1] - 1].color.g,
+                            this.shipDetails[this.gridActual[i - 1][j - 1] - 1].color.b,
+                            75
+                        );
+                        p5.ellipse(indent + 67.5 + 35 * i, indent_y + 97.5 + 35 * j, 25, 25);
+                    }
                 }
             }
         }
+        
         return 0;
     };
     arrangeShip() {
@@ -303,7 +336,7 @@ class Player{
                     if (!shipOverlapped) {
                         // updates ships begin coordinate which will be sent to database
                         this.shipDetails[size - 1].begin.x = a;
-                        this.shipDetails[size - 1].begin.x = b;
+                        this.shipDetails[size - 1].begin.y = b;
     
                         for (i = 0; i < num; i++) {
                             this.gridActual[a + i][b] = size; //  vertical arrangement by random
