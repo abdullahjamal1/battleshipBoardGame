@@ -1,7 +1,7 @@
 import { p5 } from "..";
 import Button from "../classes/Button";
 import { animation } from "../draw";
-import mapSwap from "../mapSwap";
+import mapSwap from "../utils/mapSwap";
 import { GameStateEnum, alerts, initPlayers, players, saveGameState, persistentGameState, updateCurrentGameState } from "../setup/sketch";
 
 // background(0, 255, 255,100);

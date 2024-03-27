@@ -92,4 +92,5 @@ ________________________________________________________________________________
  * supports game statistics
  * AI uses probability-density model to guess shot
  * supports density filter option to reveal how the AI works internally
+ * Uses sentry.io for reporting application errors.
  ____________________________________________________________________________________________________

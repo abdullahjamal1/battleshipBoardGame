@@ -1,4 +1,4 @@
-import { players } from "./setup/sketch";
+import { players } from "../setup/sketch";
 
 /**
  * mapSwap

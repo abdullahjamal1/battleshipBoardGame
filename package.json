@@ -12,12 +12,14 @@
   "author": "Abdullah Jamal",
   "license": "ISC",
   "dependencies": {
+    "@sentry/browser": "^7.108.0",
     "p5": "^1.0.0"
   },
   "devDependencies": {
     "@types/chrome": "^0.0.263",
     "@types/p5": "^1.7.6",
     "bestzip": "^2.2.1",
+    "dotenv-webpack": "^8.1.0",
     "ts-loader": "^9.3.0",
     "typescript": "^4.6.4",
     "webpack": "^5.72.1",

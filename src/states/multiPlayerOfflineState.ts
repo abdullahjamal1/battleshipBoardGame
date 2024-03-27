@@ -1,7 +1,7 @@
 import { p5 } from "..";
 import Button from "../classes/Button";
 import { animation } from "../draw";
-import mapSwap from "../mapSwap";
+import mapSwap from "../utils/mapSwap";
 import { GameStateEnum, alerts, initPlayers, players, persistentGameState, updateCurrentGameState } from "../setup/sketch";
 
 let player1AutoButton = new Button("Auto", 80, 490);
